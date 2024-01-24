@@ -1,10 +1,10 @@
 # Project Title
 
-Close Reader
+_CloseReader_
 
 ## Overview
 
-Close Reader is an app for reading and learning about poetry with the help of generative AI.
+_CloseReader_ is an app for reading and learning about poetry with the help of generative AI.
 
 ### Problem
 
@@ -13,23 +13,22 @@ Almost all the poetry that students read in English literature programs can be f
 ### User Profile
 
 - General readers:
-  - Curious about great poets like Shakespeare or Wordsworth, but don’t know where to start
+  - Curious about the poetic tradition, but don’t know where to start
   - Looking for a clean, well-designed reading environment that looks good on mobile devices
   - Want help understanding and interpreting what they’re reading
 
 ### Features
 
 - As a user, I want to be able to view poems sorted by author
-- As a user, I want to be able to search for poems by author, title
+- As a user, I want to be able to search for poems by author and/or title
 - As a user, I want to click on a poem and see it displayed in a reader-friendly view
+- As a user, I want to have access to curated collections of poems
 - As a user viewing a poem I want to click on a button that will display AI-generated analysis to help me understand the text
-
-- As as user, I want to be able to create an account to manage
-- As a logged-in user, I want to curate playlist-like collections of poems that other users can access
+- As as user, I want to be able to create an account
+- As a logged-in user, I want to b e able to curate collections of poems that other users can access
 - As a logged-in user, I want to be able to “like” my favourite collections
-- As a logged-in user, I want to be able to “like” my favourite poems and add them to a personal collection
-- As a logged-in user, I want to be to to “unlike” and remove poems from my personal collection
-- As logged-in user, I want to be able to upvote my favourite poems
+- As a logged-in user, I want to be able to “like” my favourite poems and see them in a favorites list
+- As a logged-in user, I want to be to to “unlike” poems and remove them from my favorites list
 
 ## Implementation
 
@@ -39,17 +38,23 @@ Almost all the poetry that students read in English literature programs can be f
 - Node
 - Front-end libraries
   - A front end library for pre-styled components (e.g., MaterialUI)
-  - Framer Motion to handle animations
+  - Framer Motion for animations
 - Client libraries:
   - React
   - React-router
   - Axios
 - Server libraries:
   - Express
+  - Knex
+- Database
+  - MySQL
 
 ### APIs
 
-- I'll be using an external API called [PoetryDB](https://github.com/thundercomb/poetrydb/tree/master)
+- _CloseReader_ will use two external APIs to retrieve and generate content:
+  - For poetry: [PoetryDB](https://github.com/thundercomb/poetrydb)
+  - For analysis: [OpenAI API](https://platform.openai.com/)
+- _CloseReader_ will also have its own server and databse for storing usernames, passwords, a user's favourites list, and curated collections of poems
 
 ### Sitemap
 
@@ -63,35 +68,21 @@ Almost all the poetry that students read in English literature programs can be f
 
 ### Mockups
 
-#### Home Page
+- Note: mockups not yet complete. Also, first drafts were done with a different working title for the app (_Sylva_), but there's already an educational app with that name
 
-![]()
+#### Header Navigation
 
-#### Browse Poets Page
+![](./mockups/Header-Navigation.png)
 
-![]()
+#### Home Page with Hero
 
-#### Poetry Collections Page
+![](./mockups/Hero.png)
 
-![]()
+### Endpoints: PoetryDB
 
-#### Individual Poet Page
+**GET https://poetrydb.org/title/:poemTitle/**
 
-![]()
-
-#### Poem Page
-
-![]()
-
-#### User's Favourite Poems Page
-
-![]()
-
-### Endpoints
-
-**GET /title/:poemTitle/**
-
-- Gets a JSON with each specific poem by title
+- Gets a single poem by title
 
 Parameters:
 
@@ -127,7 +118,7 @@ Response:
 ]
 ```
 
-**GET /author/:authorName**
+**GET https://poetrydb.org/author/:authorName**
 
 - Get all poems by a single author
 
@@ -161,7 +152,7 @@ Response:
     "title": "To My Brothers",
     "author": "John Keats",
     "lines": [
-      // LInes
+      // Lines
     ],
     "linecount": "14"
   }
@@ -169,58 +160,95 @@ Response:
 ]
 ```
 
-**_ GET /author _**
+**GET https://poetrydb.org/author**
 
 - Get all authors
 - Input field: `author`
-- Search term: none
-- Example request
-
-**POST /cafes/:id/rating**
-
-- Logged in user can add their rating of a café
-
-Parameters:
-
-- id: Café id
-- token: JWT of the logged in user
-- rating: Number Rating out of 5 in 0.5 increments
+- Example request:
 
 Response:
 
-```
+```json
 {
-    "id": 1,
-    "name": "Quantum Coffee",
-    "distance": 0.25,
-    "averageRating": 4.5,
-    "userRating": 5
+  "authors": [
+    "Adam Lindsay Gordon",
+    "Alan Seeger",
+    "Alexander Pope",
+    "Algernon Charles Swinburne",
+    // Etc, etc ...
+    "William Shakespeare",
+    "William Topaz McGonagall",
+    "William Vaughn Moody",
+    "William Wordsworth"
+  ]
 }
 ```
 
-**PUT /cafes/:id/rating**
+### Endpoint: OpenAI API
 
-- Logged in user can update their rating of a café
+**POST https://api.openai.com//v1/chat/completions**
+
+- Posts the title of poem to mode with accompanying prompt and returns generated response
 
 Parameters:
 
-- id: Café id
-- token: JWT of the logged in user
-- rating: Number Rating out of 5 in 0.5 increments
+- `model`: id of the language model to use (e.g, `gpt-4`, `gpt-3.5-turbo` )
+- `messages`: An array of message objects containing preliminary prompt, the user's
+  messages, and the model's responses
+- `temperature`: ranges from 0 to 2, with 2 resulting in more diverse and creative resuls
+- `max_tokens`: Maximum number of tokens that can be generated (100 tokens ~= 75 words )
 
-Response:
+Example Request:
 
-```
+```json
 {
-    "id": 1,
-    "name": "Quantum Coffee",
-    "distance": 0.25,
-    "averageRating": 4.5,
-    "userRating": 5
+  "model": "gpt-3.5-turbo",
+  "messages": [
+    {
+      "role": "system",
+      "content": "You are poetry expert. When you receive a poem title, please generate a short interpretive analysis that will help a reader understand what the poem is about, any interesting things to pay attention to, and situate the poem in its historical or biographical context. "
+    },
+    {
+      "role": "user",
+      "content": "Ozymandias by Percy Bysse Shelley"
+    }
+  ],
+  "temperature": 0.7,
+  "max_tokens": 200
 }
 ```
 
-**POST /users/register**
+Response:
+
+```json
+{
+  "id": "chatcmpl-8kMGXWP6DiChc5DJwRsYPbc8TtTqH",
+  "object": "chat.completion",
+  "created": 1706059369,
+  "model": "gpt-3.5-turbo-0613",
+  "choices": [
+    {
+      "index": 0,
+      "message": {
+        "role": "assistant",
+        "content": "\"Ozymandias\" by Percy Bysshe Shelley is a sonnet that explores the transient nature of power and the inevitable decay of all human achievements. The poem takes its name from the Greek name for the Egyptian pharaoh Ramses II, known as Ozymandias. Through vivid language and imagery, Shelley presents a scene of a fallen statue in the desert, depicting the remains of a once-great ruler.\n\nThe poem begins with a traveler recounting his encounter with a colossal statue, which lies shattered and eroded in the vast desert. The remnants of the statue serve as a metaphor for the fleeting nature of power and the eventual insignificance of even the mightiest rulers. The inscription on the statue's pedestal reads: \"My name is Ozymandias, King of Kings; / Look on my Works, ye Mighty, and despair!\" This inscription, once a testament to the pharaoh's grandeur, now serves to highlight the irony of his self-proclaimed invincibility"
+      },
+      "logprobs": null,
+      "finish_reason": "length"
+    }
+  ],
+  "usage": {
+    "prompt_tokens": 74,
+    "completion_tokens": 200,
+    "total_tokens": 274
+  },
+  "system_fingerprint": null
+}
+```
+
+### Endpoints: Server
+
+**POST /users/signup**
 
 - Add a user account
 
@@ -231,9 +259,9 @@ Parameters:
 
 Response:
 
-```
+```json
 {
-    "token": "seyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6I..."
+  "token": "seyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6I..."
 }
 ```
 
@@ -243,92 +271,142 @@ Response:
 
 Parameters:
 
-- email: User's email
-- password: User's provided password
+- `email`: User's email
+- `password`: User's provided password
 
 Response:
 
-```
+```json
 {
-    "token": "seyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6I..."
+  "token": "seyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6I..."
 }
 ```
 
-### Auth
+**POST /:userName/favorites**
+**GET /:userName/favorites**
 
-- JWT auth
-  - Before adding auth, all API requests will be using a fake user with id 1
-  - Added after core features have first been implemented
-  - Store JWT in localStorage, remove when a user logs out
-  - Add states for logged in showing different UI in places listed in mockups
+- Post: When a user clicks the "like" button on a poem, posts the poem to a list of their favorites
+- Get: When a user navigates to their Favorites Page, returns a l
+
+Request (POST)
+
+```json
+[
+  {
+    "title": "Happy Is England! I Could Be Content",
+    "author": "John Keats",
+    "lines": [
+      // Lines
+    ],
+    "linecount": "14"
+  }
+]
+```
+
+Response (POST & GET)
+
+```json
+[{
+  "title": "Happy Is England! I Could Be Content",
+  "author": "John Keats",
+  "lines": [
+      // Lines
+    ],
+  "linecount": "14",
+}
+{
+"title": "Ozymandias",
+"author": "Percy Bysshe Shelley",
+"lines": [
+      // Lines
+    ],
+"linecount": "14"
+}
+{
+"title": "Sonnet 1 - From Fairest Creatures We Desire Increase",
+"author": "Shakespeare",
+"lines": [
+      // Lines
+    ],
+"linecount": "14"
+}
+]
+
+
+```
 
 ## Roadmap
 
-- Create client
+### Frontend
 
-  - react project with routes and boilerplate pages
+- Set up: create react app with routes and pages
 
-- Create server
+- Feature: Home Page
 
-  - express project with routing, with placeholder 200 responses
+  - Component: Header with navigation menu, search, login/signup
+  - Compoenent: Footer
 
-- Create migrations
+- Feature: Browse Poets Page
 
-- Gather 15 sample café geolocations in two different cities
+  - PoetryDB GET requests to fetch all authors
+  - Render list with response data
+  - Clicking on navigates to Author Page
 
-- Create seeds with sample café data
+- Feature: Author Page
 
-- Deploy client and server projects so all commits will be reflected in production
+  - Render list of all available poems by selected author
+  - Clicking on poem links to Poem Page
 
-- Feature: List cafés from a given location
+- Feature: Poem Page
 
-  - Implement list cafés page including location form
-  - Store given location in sessionStorage
-  - Create GET /cafes endpoint
+  - Create responsive reading environment to render poem lines
+  - Component: AI analysis button
 
-- Feature: View café
+- Feature: Search Results Page
 
-  - Implement view café page
-  - Create GET /cafes/:id
+  - Create list of poems returned by searching for title or author
 
-- Feature: Rate café
+- Feature: Signup/Login Page
 
-  - Add form input to view café page
-  - Create POST /ratings
-  - States for add & update ratings
+  - Create login form front-end functionality
 
-- Feature: Home page
+- Feature: Poetry Collections Page
 
-- Feature: Create account
+  - Create cards showing "playlists" for poems grouped by author, topic, century, etc.
 
-  - Implement register page + form
-  - Create POST /users/register endpoint
+- Feature: User's Favorite Poems Page
+  - Create table of poems "liked" by user
 
-- Feature: Login
+### Backend
 
-  - Implement login page + form
-  - Create POST /users/login endpoint
+- Set up: create node express server with routes
+
+- Set up: create database using Knex and MySQL
+
+- Feature: Login/Register
+
+  - Create functionality and connect to front-end
+
+- Feature: Favorites
+
+  - Create table/ to store for user's "liked" poems
+
+- Feature: Collections
+
+  - Create table of collections with titles of included poems
 
 - Feature: Implement JWT tokens
 
   - Server: Update expected requests / responses on protected endpoints
   - Client: Store JWT in local storage, include JWT on axios calls
 
-- Bug fixes
+- Testing
 
-- DEMO DAY
+- Demo Day
 
 ## Nice-to-haves
 
-- Integrate Google Places / Maps
-  - View more details about a café
-  - Visual radius functionality
-- Forgot password functionality
-- Ability to add a café
-- Elite status badging for users and cafés: Gamify user ratings
-- Expand rating system
-  - Coffee
-  - Ambiance
-  - Staff
-- Expanded user information: full name, favorite café
-- Unit and Integration Tests
+- Images and biographical summaries for author pages
+- Personalized and shareable collections
+- Ability to save and refresh analyses
+- Rankings for mosted liked poems, authors, and collections
