@@ -34,20 +34,22 @@ Almost all the poetry that students read in English literature programs can be f
 
 ### Tech Stack
 
-- React
+#### Build/Development
+
+- Vite
+
+#### Runtime Environment
+
 - Node
-- Front-end libraries
-  - A front end library for pre-styled components (e.g., MaterialUI)
-  - Framer Motion for animations
-- Client libraries:
-  - React
-  - React-router
-  - Axios
-- Server libraries:
-  - Express
-  - Knex
-- Database
-  - MySQL
+
+#### Frameworks and Libraries
+
+- React
+- Tailwind
+- Radix
+- Framer Motion
+- Axios
+- Express
 
 ### APIs
 
