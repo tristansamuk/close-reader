@@ -1,7 +1,10 @@
+require("dotenv").config();
 const express = require("express");
 const app = express();
 const cors = require("cors");
-require("dotenv").config();
+
+// .env variables
+const { PORT, CORS_ORIGIN } = process.env;
 
 // Route imports
 
@@ -19,6 +22,6 @@ app.get("/", (req, res) => {
 });
 
 // Port
-app.listen(port, () => {
-  console.log(`Server listening on port ${port}`);
+app.listen(PORT, () => {
+  console.log(`Server listening on port ${PORT}`);
 });
