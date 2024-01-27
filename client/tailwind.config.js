@@ -5,4 +5,5 @@ export default {
     extend: {},
   },
   plugins: [],
+  // darkMode: "class" <-- only if using tw for dark mode rather than radix
 };
