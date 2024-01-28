@@ -1,16 +1,15 @@
-import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
-import { TextField } from "@radix-ui/themes";
-
 const SearchBar: React.FC = () => {
   return (
-    <div className="hidden md:inline-block">
-      <TextField.Root>
-        <TextField.Slot>
-          <MagnifyingGlassIcon height="16" width="16" />
-        </TextField.Slot>
-        <TextField.Input placeholder="Search..." />
-      </TextField.Root>
-    </div>
+    <>
+      <label>
+        <input
+          name="search"
+          className="bg-magnifying-glass hidden h-7 rounded-md border border-solid border-black bg-left bg-no-repeat md:inline"
+          type="text"
+          placeholder="    Search..."
+        />
+      </label>
+    </>
   );
 };
 export default SearchBar;

@@ -10,6 +10,10 @@ export default {
         sans: ["Roboto", "sans-serif"],
         serif: ["Georgia", "serif"],
       },
+      backgroundImage: {
+        "magnifying-glass":
+          "url(/src/assets/images/icons/magnifying-glass.svg)",
+      },
     },
   },
   plugins: [],
