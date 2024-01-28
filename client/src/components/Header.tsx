@@ -1,11 +1,13 @@
-import { HamburgerMenuIcon, MagnifyingGlassIcon } from "@radix-ui/react-icons";
+import { MagnifyingGlassIcon } from "@radix-ui/react-icons";
 import SearchBar from "./SearchBar";
+import Hamburger from "hamburger-react";
 
 const Header: React.FC = () => {
+  // Click handler for hamburger to display menu
   return (
     <header className="flex h-20 items-center justify-between border-b border-gray-500 px-4">
       <div className="container-left flex flex-row items-center gap-4 ">
-        <HamburgerMenuIcon className="h-5 w-5" />
+        <Hamburger size={24} />
         <h1 className="inline-block ">CloseReader</h1>
       </div>
       <div className="container-right flex w-fit flex-row">
