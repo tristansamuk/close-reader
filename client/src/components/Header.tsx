@@ -3,13 +3,13 @@ import SearchBar from "./SearchBar";
 
 const Header: React.FC = () => {
   return (
-    <header className="h-20 border-b border-gray-500 flex justify-between items-center px-4">
-      <div className="header__container--left flex flex-row gap-4 items-center w-fit">
+    <header className="flex h-20 items-center justify-between border-b border-gray-500 px-4">
+      <div className="container-left flex flex-row items-center gap-4 ">
         <HamburgerMenuIcon className="h-5 w-5" />
         <h1 className="inline-block ">CloseReader</h1>
       </div>
-      <div className="header__container--right flex flex-row w-fit">
-        <MagnifyingGlassIcon className="md:hidden h-6 w-6" />
+      <div className="container-right flex w-fit flex-row">
+        <MagnifyingGlassIcon className="h-6 w-6 md:hidden" />
         <SearchBar />
       </div>
     </header>
