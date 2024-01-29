@@ -6,11 +6,40 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem 1rem;
-  border-bottom: 1px solid gray;
   &__box-left {
     display: flex;
     align-items: center;
     gap: 0.5rem;
+  }
+  &__popout-menu {
+    animation: menuOpen 250ms;
+    border-top: 1px solid lightgrey;
+    border-bottom: 1px solid lightgrey;
+    padding: 2rem 1rem;
+    @include desktop {
+      display: none;
+    }
+  }
+  &__nav-item {
+    @include nav-items;
+    animation: slideIn 200ms ease-in-out forwards;
+    &--2 {
+      @include nav-items;
+      animation: slideIn 0.25s ease-in-out forwards;
+      animation-delay: 50ms;
+    }
+    &--3 {
+      @include nav-items;
+      animation: slideIn 0.25s 2s ease-in-out forwards;
+      animation-delay: 100ms;
+    }
+  }
+  &__overlay {
+    animation: overlayOpen 250ms;
+    background-color: black;
+    height: 100vh;
+    width: 100vw;
+    opacity: 0.5;
   }
   &__box-right {
     display: flex;
@@ -32,5 +61,35 @@
       border-radius: $border-radius;
       border: 1px solid gray;
     }
+  }
+}
+
+// Animations
+
+@keyframes menuOpen {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes overlayOpen {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 0.5;
+  }
+}
+
+@keyframes slideIn {
+  0% {
+    transform: translateX(-16px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateX(0);
+    opacity: 1;
   }
 }

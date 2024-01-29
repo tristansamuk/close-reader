@@ -14,4 +14,12 @@
   }
 }
 
-// Borders
+// Text
+
+@mixin nav-items {
+  font-family: $sans-serif;
+  font-weight: $semibold;
+  list-style: none;
+  padding: 0.5rem 0;
+  transform: translateX(-100vw);
+}
