@@ -4,9 +4,9 @@ const SearchBar: React.FC = () => {
       <label>
         <input
           name="search"
-          className="bg-magnifying-glass hidden h-7 rounded-md border border-solid border-black bg-left bg-no-repeat md:inline"
+          className="search-bar__input"
           type="text"
-          placeholder="    Search..."
+          placeholder="Search..."
         />
       </label>
     </>
