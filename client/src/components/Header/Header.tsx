@@ -3,6 +3,10 @@ import Hamburger from "hamburger-react";
 import magnifyingGlass from "../../assets/images/icons/magnifying-glass.svg";
 import { useState } from "react";
 
+// TODO
+// - Add page links to routes
+// - Set max width container for tablet and desktop with margin auto
+
 const Header: React.FC = () => {
   const [isOpen, setOpen] = useState(false);
 
