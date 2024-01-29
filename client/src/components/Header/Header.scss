@@ -6,18 +6,34 @@
   justify-content: space-between;
   align-items: center;
   padding: 1rem 1rem;
+  @include tablet {
+    padding: 2rem 2rem;
+  }
   &__box-left {
     display: flex;
     align-items: center;
     gap: 0.5rem;
   }
+  &__hamburger {
+    @include desktop {
+      display: none;
+    }
+  }
   &__popout-menu {
     animation: menuOpen 250ms;
     border-top: 1px solid lightgrey;
-    border-bottom: 1px solid lightgrey;
     padding: 2rem 1rem;
-    @include desktop {
+    @include tablet {
+      padding: 2rem 2rem;
+    }
+  }
+  &__nav-list {
+    &--desk {
       display: none;
+      @include desktop {
+        display: inline-block;
+        padding: 0 2rem;
+      }
     }
   }
   &__nav-item {
@@ -32,6 +48,15 @@
       @include nav-items;
       animation: slideIn 0.25s 2s ease-in-out forwards;
       animation-delay: 100ms;
+    }
+    &--desk {
+      @include nav-items;
+      animation: none;
+      display: none;
+      @include desktop {
+        display: inline-block;
+        padding: 0 1rem;
+      }
     }
   }
   &__overlay {
@@ -48,19 +73,6 @@
   &__mag-icon {
     height: 2rem;
     width: 2rem;
-    @include tablet {
-      display: none;
-    }
-  }
-  &__search {
-    display: none;
-    @include tablet {
-      display: inline-block;
-      height: 1.5rem;
-      width: 10rem;
-      border-radius: $border-radius;
-      border: 1px solid gray;
-    }
   }
 }
 
