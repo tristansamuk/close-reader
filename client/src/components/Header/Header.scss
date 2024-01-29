@@ -46,8 +46,13 @@
     }
     &--3 {
       @include nav-items;
-      animation: slideIn 0.25s 2s ease-in-out forwards;
+      animation: slideIn 0.25s ease-in-out forwards;
       animation-delay: 100ms;
+    }
+    &--4 {
+      @include nav-items;
+      animation: slideIn 0.25s 2s ease-in-out forwards;
+      animation-delay: 150ms;
     }
     &--desk {
       @include nav-items;

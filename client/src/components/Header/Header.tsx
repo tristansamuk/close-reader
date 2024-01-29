@@ -13,7 +13,7 @@ const Header: React.FC = () => {
 
   // Click Handlers
 
-  const handleClickAway = (): void => {
+  const handleClick = (): void => {
     setOpen(false);
   };
 
@@ -24,10 +24,16 @@ const Header: React.FC = () => {
           <div className="header__hamburger">
             <Hamburger toggled={isOpen} toggle={setOpen} size={24} />
           </div>
-          <h1 className="header__logo">CloseReader</h1>
+          <Link onClick={handleClick} to={"/"}>
+            <h1 className="header__logo">CloseReader</h1>
+          </Link>
         </div>
         <div className="header__box-right">
+          {/* Desktop Navigation Menu */}
           <ul className="header__nav-list--desk">
+            <li className="header__nav-item--desk">
+              <Link to={"/"}>Home</Link>
+            </li>
             <li className="header__nav-item--desk">
               <Link to={"authors"}>Authors</Link>
             </li>
@@ -38,7 +44,7 @@ const Header: React.FC = () => {
               <Link to={"collections"}>Collections</Link>
             </li>
           </ul>
-          <Link to={"search"}>
+          <Link onClick={handleClick} to={"search"}>
             <img
               src={magnifyingGlass}
               alt="magnifying glass"
@@ -47,29 +53,34 @@ const Header: React.FC = () => {
           </Link>
         </div>
       </header>
-      {/* Mobile/Tablet Menu and Overlay*/}
+      {/* Mobile/Tablet Navigation Menu and Overlay*/}
       {isOpen && (
         <>
           <div className="header__popout-menu">
             <ul className="header__nav-list">
               <li className="header__nav-item">
-                <Link onClick={handleClickAway} to={"authors"}>
-                  Authors
-                </Link>
-              </li>
-              <li className="header__nav-item--2">
-                <Link onClick={handleClickAway} to={"poems"}>
-                  Poems
+                <Link onClick={handleClick} to={"/"}>
+                  Home
                 </Link>
               </li>
               <li className="header__nav-item--3">
-                <Link onClick={handleClickAway} to={"collections"}>
+                <Link onClick={handleClick} to={"authors"}>
+                  Authors
+                </Link>
+              </li>
+              <li className="header__nav-item--3">
+                <Link onClick={handleClick} to={"poems"}>
+                  Poems
+                </Link>
+              </li>
+              <li className="header__nav-item--4">
+                <Link onClick={handleClick} to={"collections"}>
                   Collections
                 </Link>
               </li>
             </ul>
           </div>
-          <a onClick={handleClickAway} href="">
+          <a onClick={handleClick} href="">
             <div className="header__overlay"></div>
           </a>
         </>
