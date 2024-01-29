@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 // - Set max width container for tablet and desktop with margin auto
 
 const Header: React.FC = () => {
-  const [isOpen, setOpen] = useState(false);
+  const [isOpen, setOpen] = useState<boolean>(false);
 
   // Click Handlers
 
