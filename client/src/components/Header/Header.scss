@@ -1,0 +1,36 @@
+@use "../../styles/mixins" as *;
+@use "../../styles/variables" as *;
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 1rem;
+  border-bottom: 1px solid gray;
+  &__box-left {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  &__box-right {
+    display: flex;
+    align-items: center;
+  }
+  &__mag-icon {
+    height: 2rem;
+    width: 2rem;
+    @include tablet {
+      display: none;
+    }
+  }
+  &__search {
+    display: none;
+    @include tablet {
+      display: inline-block;
+      height: 1.5rem;
+      width: 10rem;
+      border-radius: $border-radius;
+      border: 1px solid gray;
+    }
+  }
+}

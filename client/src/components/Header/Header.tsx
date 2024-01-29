@@ -1,4 +1,4 @@
-import SearchBar from "../SearchBar/SearchBar.tsx";
+import "./Header.scss";
 import Hamburger from "hamburger-react";
 import magnifyingGlass from "../../assets/images/icons/magnifying-glass.svg";
 
@@ -16,7 +16,15 @@ const Header: React.FC = () => {
           alt="magnifying glass"
           className="header__mag-icon"
         />
-        <SearchBar />
+        {/* Search Bar */}
+        <label>
+          <input
+            name="search"
+            className="header__search"
+            type="text"
+            placeholder="Search..."
+          />
+        </label>
       </div>
     </header>
   );
