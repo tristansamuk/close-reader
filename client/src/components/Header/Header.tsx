@@ -13,7 +13,7 @@ const Header: React.FC = () => {
 
   // Click Handlers
 
-  const handleClickOverlay = (): void => {
+  const handleClickAway = (): void => {
     setOpen(false);
   };
 
@@ -38,11 +38,13 @@ const Header: React.FC = () => {
               <Link to={"collections"}>Collections</Link>
             </li>
           </ul>
-          <img
-            src={magnifyingGlass}
-            alt="magnifying glass"
-            className="header__mag-icon"
-          />
+          <Link to={"search"}>
+            <img
+              src={magnifyingGlass}
+              alt="magnifying glass"
+              className="header__mag-icon"
+            />
+          </Link>
         </div>
       </header>
       {/* Mobile/Tablet Menu and Overlay*/}
@@ -51,17 +53,23 @@ const Header: React.FC = () => {
           <div className="header__popout-menu">
             <ul className="header__nav-list">
               <li className="header__nav-item">
-                <Link to={"authors"}>Authors</Link>
+                <Link onClick={handleClickAway} to={"authors"}>
+                  Authors
+                </Link>
               </li>
               <li className="header__nav-item--2">
-                <Link to={"poems"}>Poems</Link>
+                <Link onClick={handleClickAway} to={"poems"}>
+                  Poems
+                </Link>
               </li>
               <li className="header__nav-item--3">
-                <Link to={"collections"}>Collections</Link>
+                <Link onClick={handleClickAway} to={"collections"}>
+                  Collections
+                </Link>
               </li>
             </ul>
           </div>
-          <a onClick={handleClickOverlay} href="">
+          <a onClick={handleClickAway} href="">
             <div className="header__overlay"></div>
           </a>
         </>

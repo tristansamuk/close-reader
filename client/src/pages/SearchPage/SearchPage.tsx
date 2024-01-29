@@ -1,5 +1,9 @@
 const SearchPage: React.FC = () => {
-  return <div></div>;
+  return (
+    <div>
+      <h2>Search</h2>
+    </div>
+  );
 };
 
 export default SearchPage;
