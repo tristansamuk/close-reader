@@ -1,6 +1,6 @@
 import SearchBar from "../SearchBar/SearchBar.tsx";
 import Hamburger from "hamburger-react";
-import magnifyingGlass from "../assets/images/icons/magnifying-glass.svg";
+import magnifyingGlass from "../../assets/images/icons/magnifying-glass.svg";
 
 const Header: React.FC = () => {
   // Click handler for hamburger to display menu
