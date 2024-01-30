@@ -1,6 +1,44 @@
 @use "../../styles/mixins" as *;
 @use "../../styles/variables" as *;
 
+// Animations
+
+@keyframes slideUp {
+  from {
+    transform: translateY(+5px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(-5x);
+    opacity: 1;
+  }
+}
+
+// Animation Delay
+
+.appear {
+  &-1 {
+    animation: slideUp 500ms ease-in-out;
+    animation-delay: 150ms;
+    animation-fill-mode: backwards;
+  }
+  &-2 {
+    animation: slideUp 500ms ease-in-out;
+    animation-delay: 250ms;
+    animation-fill-mode: backwards;
+  }
+  &-3 {
+    animation: slideUp 500ms ease-in-out;
+    animation-delay: 350ms;
+    animation-fill-mode: backwards;
+  }
+  &-4 {
+    animation: slideUp 500ms ease-in-out;
+    animation-delay: 400ms;
+    animation-fill-mode: backwards;
+  }
+}
+
 .hero {
   background-color: $bg-secondary;
   display: flex;
@@ -49,6 +87,7 @@
     line-height: 3.5rem;
     text-align: center;
     max-width: 21rem;
+    transform: translateY(-5px);
     @include tablet {
       font-size: 4.5rem;
       line-height: 4.75rem;
@@ -64,6 +103,7 @@
     text-align: center;
     font-size: 1.125rem;
     line-height: 2rem;
+    transform: translateY(-5px);
     @include tablet {
       font-size: 1.25rem;
       line-height: 2.25rem;
@@ -76,11 +116,12 @@
   &__button {
     @include button-dark;
     width: 8rem;
+    transform: translateY(-5px);
   }
   &__image {
     aspect-ratio: auto;
     width: 100%;
-
+    transform: translateY(-5px);
     @include tablet {
     }
     @include desktop {

@@ -15,6 +15,10 @@
     align-items: center;
     gap: 0.5rem;
   }
+  &__logo {
+    letter-spacing: -1.5px;
+    word-spacing: -3px;
+  }
   &__hamburger {
     @include desktop {
       display: none;
@@ -27,6 +31,7 @@
     border-top: 1px solid lightgrey;
     padding: 2rem 1rem;
     position: absolute;
+    z-index: 1;
     @include tablet {
       padding: 2rem 2rem;
     }
@@ -76,6 +81,7 @@
     opacity: 0.5;
     position: absolute;
     top: 18.25rem;
+    z-index: 1;
     @include tablet {
       top: 20.25rem;
     }
@@ -93,10 +99,10 @@
 // Animations
 
 @keyframes menuOpen {
-  0% {
+  from {
     opacity: 0;
   }
-  100% {
+  to {
     opacity: 1;
   }
 }
