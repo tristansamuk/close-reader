@@ -26,3 +26,16 @@
     transform: translateX(0);
   }
 }
+
+@mixin button-dark {
+  font-family: $sans-serif;
+  color: $txt-light;
+  background-color: $btn-dark;
+  border: none;
+  border-radius: $bdr-radius-lg;
+  height: 3.5rem;
+  &:hover {
+    opacity: 0.8;
+    transition: opacity 300ms;
+  }
+}

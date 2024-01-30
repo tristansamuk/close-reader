@@ -1,0 +1,90 @@
+@use "../../styles/mixins" as *;
+@use "../../styles/variables" as *;
+
+.hero {
+  background-color: $bg-secondary;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 2rem;
+  padding: 0 1.5rem;
+  height: 42rem;
+  min-width: 320px;
+  @include tablet {
+    height: 62rem;
+  }
+  @include desktop {
+    flex-direction: row;
+    height: 45rem;
+    justify-content: space-between;
+  }
+  &__button-text-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    @include desktop {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 2rem;
+    }
+  }
+  &__text-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1.5rem;
+    @include desktop {
+      align-items: flex-start;
+    }
+  }
+  &__heading {
+    font-family: $serif;
+    color: $txt-primary;
+    font-size: 3rem;
+    line-height: 3.5rem;
+    text-align: center;
+    max-width: 21rem;
+    @include tablet {
+      font-size: 4.5rem;
+      line-height: 4.75rem;
+      max-width: 37rem;
+    }
+    @include desktop {
+      text-align: left;
+    }
+  }
+  &__subheading {
+    font-family: $sans-serif;
+    color: $txt-primary;
+    text-align: center;
+    font-size: 1.125rem;
+    line-height: 2rem;
+    @include tablet {
+      font-size: 1.25rem;
+      line-height: 2.25rem;
+    }
+    @include desktop {
+      text-align: left;
+      max-width: 30rem;
+    }
+  }
+  &__button {
+    @include button-dark;
+    width: 8rem;
+  }
+  &__image {
+    aspect-ratio: auto;
+    width: 100%;
+
+    @include tablet {
+    }
+    @include desktop {
+      max-width: 70%;
+    }
+  }
+}
