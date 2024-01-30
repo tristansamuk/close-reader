@@ -1,7 +1,7 @@
 require("dotenv").config();
-import express from "express";
+import express, { Request, Response } from "express";
+import cors from "cors";
 const app = express();
-const cors = require("cors");
 // const exampleRoutes = require("./routes/example.js");
 
 // .env variables
@@ -17,7 +17,7 @@ app.use(express.json());
 
 // Home Route
 
-app.get("/", (req, res) => {
+app.get("/", (req: Request, res: Response) => {
   res.send("Hello World!");
 });
 
