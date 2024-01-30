@@ -3,12 +3,16 @@
 
 .header {
   background-color: $bg-primary;
+  animation: menuOpen 1.5s;
   display: flex;
   justify-content: space-between;
   align-items: center;
   padding: 1rem 1rem;
   @include tablet {
     padding: 2rem 2rem;
+  }
+  @include desktop {
+    padding: 2rem 1.5rem;
   }
   &__max-width-container {
     @include tablet {
@@ -44,6 +48,10 @@
     z-index: 1;
     @include tablet {
       padding: 2rem 2rem;
+      right: 0rem;
+    }
+    @include desktop {
+      display: none;
     }
   }
   &__nav-list {
@@ -94,6 +102,10 @@
     z-index: 1;
     @include tablet {
       top: 20.25rem;
+      right: 0rem;
+    }
+    @include desktop {
+      display: none;
     }
   }
   &__container-right {
@@ -117,20 +129,20 @@
   }
 }
 @keyframes overlayOpen {
-  0% {
+  from {
     opacity: 0;
   }
-  100% {
+  to {
     opacity: 0.5;
   }
 }
 
 @keyframes slideIn {
-  0% {
+  from {
     transform: translateX(-16px);
     opacity: 0;
   }
-  100% {
+  to {
     transform: translateX(0);
     opacity: 1;
   }
