@@ -1,8 +1,9 @@
-require("dotenv").config();
 import express, { Request, Response } from "express";
 import cors from "cors";
+require("dotenv").config();
 const app = express();
-// const exampleRoutes = require("./routes/example.js");
+
+// Route Imports
 
 // .env variables
 const { PORT, CORS_ORIGIN } = process.env;
@@ -12,14 +13,15 @@ const { PORT, CORS_ORIGIN } = process.env;
 app.use(cors({ origin: CORS_ORIGIN }));
 app.use(express.json());
 
-// Routes
-// app.use("/example", exampleRoutes);
-
 // Home Route
-
 app.get("/", (req: Request, res: Response) => {
   res.send("Hello World!");
 });
+
+// Routes
+
+import collectionsRouter from "./routes/collections";
+app.use("/collections", collectionsRouter);
 
 // Port
 app.listen(PORT, () => {
