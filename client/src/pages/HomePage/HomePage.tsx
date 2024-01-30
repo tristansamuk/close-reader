@@ -1,4 +1,5 @@
 import Hero from "../../components/Hero/Hero";
+import "./HomePage.scss";
 
 const HomePage: React.FC = () => {
   return (

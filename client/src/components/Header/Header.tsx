@@ -23,9 +23,9 @@ const Header: React.FC = () => {
   };
 
   return (
-    <div className="header__box-max-width">
+    <div className="header__max-width-container">
       <header className="header">
-        <div className="header__box-left">
+        <div className="header__container-left">
           <div className="header__hamburger">
             <Hamburger toggled={isOpen} toggle={setOpen} size={24} />
           </div>
@@ -33,7 +33,7 @@ const Header: React.FC = () => {
             <h1 className="header__logo">close reader</h1>
           </Link>
         </div>
-        <div className="header__box-right">
+        <div className="header__container-right">
           {/* Desktop Navigation Menu */}
           <ul className="header__nav-list--desk">
             <li className="header__nav-item--desk">

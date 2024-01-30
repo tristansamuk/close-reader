@@ -5,11 +5,11 @@
 
 @keyframes slideUp {
   from {
-    transform: translateY(+5px);
+    transform: translateY(+10px);
     opacity: 0;
   }
   to {
-    transform: translateY(-5x);
+    transform: translateY(0px);
     opacity: 1;
   }
 }
@@ -42,22 +42,44 @@
 .hero {
   background-color: $bg-secondary;
   display: flex;
-  flex-direction: column;
   justify-content: center;
-  align-items: center;
-  gap: 2rem;
-  padding: 0 1.5rem;
-  height: 42rem;
-  min-width: 320px;
-  @include tablet {
-    height: 62rem;
+  // display: flex;
+  // flex-direction: column;
+  // justify-content: center;
+  // align-items: center;
+  // gap: 2rem;
+  // padding: 0 1.5rem;
+  // height: 42rem;
+  // min-width: 320px;
+  // @include tablet {
+  //   height: 62rem;
+  // }
+  // @include desktop {
+  //   flex-direction: row;
+  //   height: 45rem;
+  //   justify-content: space-between;
+  // }
+  &__max-width-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    padding: 0 1.5rem;
+    height: 42rem;
+    @include tablet {
+      height: 62rem;
+      max-width: 95%;
+    }
+    @include desktop {
+      flex-direction: row;
+      height: 45rem;
+      justify-content: space-between;
+      max-width: 1300px;
+      margin: auto;
+    }
   }
-  @include desktop {
-    flex-direction: row;
-    height: 45rem;
-    justify-content: space-between;
-  }
-  &__button-text-box {
+  &__button-text-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -70,7 +92,7 @@
       gap: 2rem;
     }
   }
-  &__text-box {
+  &__text-container {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -87,7 +109,6 @@
     line-height: 3.5rem;
     text-align: center;
     max-width: 21rem;
-    transform: translateY(-5px);
     @include tablet {
       font-size: 4.5rem;
       line-height: 4.75rem;
@@ -99,11 +120,10 @@
   }
   &__subheading {
     font-family: $sans-serif;
-    color: $txt-primary;
+    color: $txt-secondary;
     text-align: center;
     font-size: 1.125rem;
     line-height: 2rem;
-    transform: translateY(-5px);
     @include tablet {
       font-size: 1.25rem;
       line-height: 2.25rem;
@@ -116,12 +136,10 @@
   &__button {
     @include button-dark;
     width: 8rem;
-    transform: translateY(-5px);
   }
   &__image {
     aspect-ratio: auto;
     width: 100%;
-    transform: translateY(-5px);
     @include tablet {
     }
     @include desktop {

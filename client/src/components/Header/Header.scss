@@ -10,7 +10,17 @@
   @include tablet {
     padding: 2rem 2rem;
   }
-  &__box-left {
+  &__max-width-container {
+    @include tablet {
+      max-width: 95%;
+      margin: auto;
+      @include desktop {
+        max-width: 1300px;
+        margin: auto;
+      }
+    }
+  }
+  &__container-left {
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -86,7 +96,7 @@
       top: 20.25rem;
     }
   }
-  &__box-right {
+  &__container-right {
     display: flex;
     align-items: center;
   }
