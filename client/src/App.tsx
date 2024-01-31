@@ -1,6 +1,5 @@
 import "./App.scss";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-// import axios from "axios";
 import Header from "./components/Header/Header";
 import HomePage from "./pages/HomePage/HomePage";
 import AuthorsPage from "./pages/AuthorsPage/AuthorsPage";
@@ -12,6 +11,10 @@ import SinglePoemPage from "./pages/SinglePoemPage/SinglePoemPage";
 import SearchPage from "./pages/SearchPage/SearchPage";
 
 function App() {
+  // Change to process.env
+  // const baseUrl = "http://localhost:8080";
+  const apiURL = "https://poetrydb.org/";
+
   return (
     <BrowserRouter>
       <Header />
@@ -22,7 +25,10 @@ function App() {
         <Route path="/collections/" element={<CollectionsPage />} />
         <Route path="/collections/:title" element={<SingleCollectionPage />} />
         <Route path="/poems" element={<PoemsPage />} />
-        <Route path="/poems/:poem-title" element={<SinglePoemPage />} />
+        <Route
+          path="/poems/:title"
+          element={<SinglePoemPage apiUrl={apiURL} />}
+        />
         <Route path="/search" element={<SearchPage />} />
         {/* Search Results page needed? */}
       </Routes>
