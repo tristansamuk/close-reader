@@ -27,19 +27,21 @@
 
 .analysis {
   &__window {
-    animation: windowOpen 500ms ease-in-out 1s backwards;
+    animation: windowOpen 500ms ease-in-out 500ms backwards;
+    background-color: $bg-secondary;
+    border: none;
+    width: 100vw;
+    height: 100vh;
+    padding: 1rem 1rem;
+    // Flex
     display: flex;
     flex-direction: column;
     align-items: flex-start;
     gap: 1rem;
-    left: 22rem;
-    background-color: $bg-secondary;
-    border: none;
-    border-radius: $bdr-radius-sm;
-    bottom: 5.5rem;
-    box-shadow: 1px 2px 3px lightgray;
-    padding: 1rem 1rem;
-    position: sticky;
+    // Position
+    position: absolute;
+    top: 0rem;
+    left: 0rem;
   }
   &__text {
     @include body-copy;
