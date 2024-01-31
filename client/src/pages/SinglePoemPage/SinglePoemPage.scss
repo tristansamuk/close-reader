@@ -93,5 +93,9 @@
     bottom: 1rem;
     height: 3rem;
     width: 3rem;
+    transition: scale 200ms ease-in-out;
+    &:hover {
+      scale: 1.25;
+    }
   }
 }
