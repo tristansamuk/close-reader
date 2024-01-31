@@ -14,6 +14,7 @@ app.use(cors({ origin: CORS_ORIGIN }));
 app.use(express.json());
 
 // Home Route
+
 app.get("/", (req: Request, res: Response) => {
   res.send("Hello World!");
 });
@@ -21,7 +22,12 @@ app.get("/", (req: Request, res: Response) => {
 // Routes
 
 import collectionsRouter from "./routes/collections";
+import authorsRouter from "./routes/authors";
+import poemsRouter from "./routes/poems";
+
 app.use("/collections", collectionsRouter);
+app.use("/authors", authorsRouter);
+app.use("/poems", poemsRouter);
 
 // Port
 app.listen(PORT, () => {
