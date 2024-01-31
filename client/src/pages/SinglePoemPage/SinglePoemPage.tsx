@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 import "./SinglePoemPage.scss";
 import TeachIcon from "../../components/TeachIcon/TeachIcon";
+import Analysis from "../../components/Analysis/Analysis";
 
 // Types
 type Props = {
@@ -16,15 +17,24 @@ interface Poem {
 }
 [];
 
-// svg fill color
+// SVG fill color prop for icon
 
 const fill = "#FFFAF1";
 
 const SinglePoemPage = ({ apiUrl }: Props) => {
-  // Set poem's state as an empty string
+  // State for poem and analysis window
   const [poem, setPoem] = useState<Poem | null>(null);
+  const [isOpen, setIsOpen] = useState(false);
+
   const { title } = useParams();
-  // On render, make a get request to api and use reponse to update state
+
+  // Click Handler
+
+  const onClickButton = () => {
+    setIsOpen(true);
+  };
+
+  // On render, make a get request to API and use reponse to update state
   useEffect(() => {
     const fetchPoem = async () => {
       try {
@@ -36,6 +46,7 @@ const SinglePoemPage = ({ apiUrl }: Props) => {
     };
     fetchPoem();
   }, []);
+
   // Show loading state while waiting for API call to update state of `poem`
   if (!poem) {
     return (
@@ -44,6 +55,7 @@ const SinglePoemPage = ({ apiUrl }: Props) => {
       </div>
     );
   }
+
   return (
     <div className="poem__max-width-container">
       <h2 className="poem__title appear-1">{poem.title}</h2>
@@ -55,7 +67,8 @@ const SinglePoemPage = ({ apiUrl }: Props) => {
           </p>
         ))}
       </div>
-      <button className="poem__analyze">
+      {isOpen && <Analysis title={poem.title} author={poem.author} />}
+      <button onClick={onClickButton} className="poem__analysis-button">
         <TeachIcon fill={fill} />
       </button>
     </div>
