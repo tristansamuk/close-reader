@@ -39,3 +39,21 @@
     transition: opacity 300ms;
   }
 }
+
+@mixin poem-title {
+  font-family: $sans-serif;
+  color: $txt-primary;
+}
+
+@mixin poem-author {
+  font-family: $sans-serif;
+  color: $txt-secondary;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+}
+
+@mixin poem-line {
+  font-family: $serif;
+  font-size: 1rem;
+  line-height: 1.75rem;
+}

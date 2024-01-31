@@ -1,0 +1,71 @@
+@use "../../styles/mixins" as *;
+@use "../../styles/variables" as *;
+
+// Animations
+
+@keyframes slideUp {
+  from {
+    transform: translateY(+10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
+
+// Animation Delay
+
+.appear {
+  &-1 {
+    animation: slideUp 500ms ease-in-out;
+    animation-delay: 150ms;
+    animation-fill-mode: backwards;
+  }
+  &-2 {
+    animation: slideUp 500ms ease-in-out;
+    animation-delay: 250ms;
+    animation-fill-mode: backwards;
+  }
+  &-3 {
+    animation: slideUp 500ms ease-in-out;
+    animation-delay: 350ms;
+    animation-fill-mode: backwards;
+  }
+  &-4 {
+    animation: slideUp 500ms ease-in-out;
+    animation-delay: 400ms;
+    animation-fill-mode: backwards;
+  }
+}
+
+.poem {
+  &__max-width-container {
+    padding: 1.5rem 1.5rem;
+  }
+  &__title {
+    @include poem-title;
+  }
+  &__author {
+    @include poem-author;
+    padding: 0.5rem 0;
+  }
+  &__line {
+    @include poem-line;
+  }
+  &__loading-container {
+    width: 100%;
+    height: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+  &__loading-text {
+    font-family: $sans-serif;
+    animation: slideUp 2s ease-in-out;
+    animation-delay: 500ms;
+    animation-fill-mode: backwards;
+    animation-iteration-count: 100;
+  }
+}
