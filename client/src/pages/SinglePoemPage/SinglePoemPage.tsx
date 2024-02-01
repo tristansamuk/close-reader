@@ -19,8 +19,10 @@ interface Poem {
 }
 [];
 
-// Base URL for server (change to .env variable)
-const baseUrl = "http://localhost:8080";
+// Variables for OpenAI API
+
+const OpenAIUrl = "https://api.openai.com//v1/chat/completions";
+const apiKey = `${import.meta.env.VITE_API_KEY}`;
 
 const SinglePoemPage = ({ apiUrl }: Props) => {
   const { title } = useParams();
@@ -40,25 +42,6 @@ const SinglePoemPage = ({ apiUrl }: Props) => {
   const onClickClose = () => {
     setIsOpen(false);
     setIsButtonVisible(true);
-  };
-
-  // OpenAI Get Function
-
-  const getAnalysis = async () => {
-    const options = {
-      method: "POST",
-      body: {
-        message: "how are you?",
-      },
-    };
-
-    try {
-      const response = await axios.get(`${baseUrl}/completions`, options);
-      const analysis = response.data;
-      console.log(analysis);
-    } catch (error) {
-      console.error(error);
-    }
   };
 
   // On render, makes a get request to API and uses reponse to update state
@@ -103,7 +86,12 @@ const SinglePoemPage = ({ apiUrl }: Props) => {
           <button onClick={onClickClose} className="analysis__close-icon">
             <img src={closeIcon} alt="close" />
           </button>
-          <Analysis baseUrl={baseUrl} author={poem.author} title={poem.title} />
+          <Analysis
+            OpenAIUrl={OpenAIUrl}
+            apiKey={apiKey}
+            author={poem.author}
+            title={poem.title}
+          />
         </div>
       )}
       {/* Analysis button is visible only when analysis window is closed */}

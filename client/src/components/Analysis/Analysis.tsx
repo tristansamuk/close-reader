@@ -1,38 +1,66 @@
 import axios from "axios";
 import RobotIcon from "../RobotIcon/RobotIcon";
 import "./Analysis.scss";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-type Props = {
+// Types
+
+interface Props {
   title: string;
   author: string;
-  baseUrl: string;
-};
+  OpenAIUrl: string;
+  apiKey: string;
+}
 
-// interface options {
-//   choices: {
-//     index: number;
-//     messages: {
-//       role: string;
-//       content: string;
-//     };
-//   };
-// }
-// [];
+interface Body {
+  model: string;
+  messages: {
+    role: string;
+    content: string;
+  }[];
+  temperature: number;
+  max_tokens?: number;
+}
 
-const Analysis = ({ title, author, baseUrl }: Props) => {
-  const [text, setText] = useState(null);
+const Analysis = ({ title, author, OpenAIUrl, apiKey }: Props) => {
+  const [text, setText] = useState<string | null>(null);
 
-  const getAnalysis = async () => {
-    try {
-      const response = await axios.get(`${baseUrl}/completions`, options);
-      const analysis = response.data;
-      console.log(analysis);
-    } catch (error) {
-      console.error(error);
-    }
+  // Request body and headers
+
+  const body: Body = {
+    model: "gpt-3.5-turbo",
+    messages: [
+      {
+        role: "system",
+        content:
+          "You are poetry expert. When you receive a poem title, please generate a short interpretive analysis that will help a reader understand what the poem is about, any interesting things to pay attention to, and situate the poem in its historical or biographical context.",
+      },
+      {
+        role: "user",
+        content: `${title} by ${author}`,
+      },
+    ],
+    temperature: 0.7,
+    // max_tokens: 250,
   };
 
+  useEffect(() => {
+    const fetchAnalysis = async () => {
+      try {
+        const response = await axios.post(`${OpenAIUrl}`, body, {
+          headers: {
+            "Content-Type": "application/json",
+            Authorization: `Bearer ${apiKey}`,
+          },
+        });
+        const analysis: string = response.data.choices[0].message.content;
+        setText(analysis);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchAnalysis();
+  }, []);
   // Loading state
 
   if (!text) {
@@ -43,11 +71,7 @@ const Analysis = ({ title, author, baseUrl }: Props) => {
     );
   }
 
-  //   return (
-  //       <p className="analysis__text">
-  //         {`Sample analysis: ${text}`}
-  //       </p>
-  //   );
+  return <p className="analysis__text">{`${text}`}</p>;
 };
 
 export default Analysis;
