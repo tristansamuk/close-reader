@@ -1,6 +1,36 @@
 @use "../../styles/mixins" as *;
 @use "../../styles/variables" as *;
 
+// Animations
+
+@keyframes menuOpen {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+@keyframes overlayOpen {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 0.5;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateX(-16px);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
 .header {
   background-color: $bg-primary;
   animation: menuOpen 1.5s;
@@ -115,35 +145,5 @@
   &__mag-icon {
     height: 2rem;
     width: 2rem;
-  }
-}
-
-// Animations
-
-@keyframes menuOpen {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
-@keyframes overlayOpen {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 0.5;
-  }
-}
-
-@keyframes slideIn {
-  from {
-    transform: translateX(-16px);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
   }
 }

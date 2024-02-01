@@ -6,6 +6,11 @@ import RobotIcon from "../../components/RobotIcon/RobotIcon";
 import closeIcon from "../../assets/images/icons/cross-1.svg";
 import Analysis from "../../components/Analysis/Analysis";
 
+// Joan's Design advice
+
+// On loading, have static text that says "Loading..." below pulsing robot
+// On desktop, align left margin with center and have analysis pop out beside
+
 // Types
 
 type Props = {
@@ -82,17 +87,20 @@ const SinglePoemPage = ({ apiUrl }: Props) => {
 
       {/* When state of isOpen = true, open analysis window */}
       {isOpen && (
-        <div className="analysis__window">
-          <button onClick={onClickClose} className="analysis__close-icon">
-            <img src={closeIcon} alt="close" />
-          </button>
-          <Analysis
-            title={poem.title}
-            author={poem.author}
-            OpenAIUrl={OpenAIUrl}
-            apiKey={apiKey}
-          />
-        </div>
+        <>
+          <div className="analysis__window">
+            <button onClick={onClickClose} className="analysis__close-icon">
+              <img src={closeIcon} alt="close" />
+            </button>
+            <Analysis
+              title={poem.title}
+              author={poem.author}
+              OpenAIUrl={OpenAIUrl}
+              apiKey={apiKey}
+            />
+          </div>
+          <div className="analysis__overlay"></div>
+        </>
       )}
       {/* Analysis button is visible only when analysis window is closed */}
 

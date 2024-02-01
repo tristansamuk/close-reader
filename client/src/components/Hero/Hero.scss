@@ -43,22 +43,6 @@
   background-color: $bg-secondary;
   display: flex;
   justify-content: center;
-  // display: flex;
-  // flex-direction: column;
-  // justify-content: center;
-  // align-items: center;
-  // gap: 2rem;
-  // padding: 0 1.5rem;
-  // height: 42rem;
-  // min-width: 320px;
-  // @include tablet {
-  //   height: 62rem;
-  // }
-  // @include desktop {
-  //   flex-direction: row;
-  //   height: 45rem;
-  //   justify-content: space-between;
-  // }
   &__max-width-container {
     display: flex;
     flex-direction: column;

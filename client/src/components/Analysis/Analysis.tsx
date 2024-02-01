@@ -42,7 +42,6 @@ const Analysis = ({ title, author, OpenAIUrl, apiKey }: Props) => {
       },
     ],
     temperature: 0.7,
-    stream: true,
   };
 
   useEffect(() => {
