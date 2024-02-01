@@ -6,35 +6,22 @@ import { useState } from "react";
 type Props = {
   title: string;
   author: string;
+  baseUrl: string;
 };
 
-interface Analysis {
-  choices: {
-    index: number;
-    messages: {
-      role: string;
-      content: string;
-    };
-  };
-}
-[];
+// interface options {
+//   choices: {
+//     index: number;
+//     messages: {
+//       role: string;
+//       content: string;
+//     };
+//   };
+// }
+// [];
 
-// Base URL for server (change to .env variable)
-
-const baseUrl = "http://localhost:8080";
-
-const Analysis = ({ title, author }: Props) => {
-  const [text, setText] = useState<Analysis | null>(null);
-
-  const options = {
-    method: "POST",
-    // headers: {
-    //   "Content-Type": "application/json",
-    // },
-    body: {
-      message: "What is poetry?",
-    },
-  };
+const Analysis = ({ title, author, baseUrl }: Props) => {
+  const [text, setText] = useState(null);
 
   const getAnalysis = async () => {
     try {
