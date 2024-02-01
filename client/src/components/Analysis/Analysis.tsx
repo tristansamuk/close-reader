@@ -28,12 +28,12 @@ const Analysis = ({ title, author, OpenAIUrl, apiKey }: Props) => {
   // Request body and headers
 
   const body: Body = {
-    model: "gpt-3.5-turbo",
+    model: "gpt-4",
     messages: [
       {
         role: "system",
         content:
-          "You are poetry expert. When you receive a poem title, please generate a short interpretive analysis that will help a reader understand what the poem is about, any interesting things to pay attention to, and situate the poem in its historical or biographical context.",
+          "You are poetry expert. When you receive a poem title, please generate a short interpretive analysis that will help a reader understand what the poem is about, any interesting things to pay attention to, and situate the poem in its historical or biographical context. Never include a heading in your response",
       },
       {
         role: "user",

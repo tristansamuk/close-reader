@@ -24,16 +24,20 @@
 }
 
 .analysis {
-  @include body-copy;
   animation: slideUp 500ms ease-in-out 1.5s backwards;
+
   &__loading {
-    width: 100%;
-    height: 100%;
+    animation: loading 2s ease-in-out 500ms backwards;
+    animation-iteration-count: infinite;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    animation: loading 2s ease-in-out 500ms backwards;
-    animation-iteration-count: infinite;
+    width: 100%;
+    height: 100vh;
+  }
+  &__text {
+    @include poem-line;
+    margin: 0 1rem;
   }
 }
