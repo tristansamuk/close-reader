@@ -87,10 +87,10 @@ const SinglePoemPage = ({ apiUrl }: Props) => {
             <img src={closeIcon} alt="close" />
           </button>
           <Analysis
+            title={poem.title}
+            author={poem.author}
             OpenAIUrl={OpenAIUrl}
             apiKey={apiKey}
-            author={poem.author}
-            title={poem.title}
           />
         </div>
       )}

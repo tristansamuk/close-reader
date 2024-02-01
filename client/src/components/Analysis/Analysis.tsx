@@ -1,7 +1,7 @@
+import { useState, useEffect } from "react";
 import axios from "axios";
 import RobotIcon from "../RobotIcon/RobotIcon";
 import "./Analysis.scss";
-import { useState, useEffect } from "react";
 
 // Types
 
@@ -20,6 +20,7 @@ interface Body {
   }[];
   temperature: number;
   max_tokens?: number;
+  stream?: boolean;
 }
 
 const Analysis = ({ title, author, OpenAIUrl, apiKey }: Props) => {
@@ -41,7 +42,7 @@ const Analysis = ({ title, author, OpenAIUrl, apiKey }: Props) => {
       },
     ],
     temperature: 0.7,
-    // max_tokens: 250,
+    stream: true,
   };
 
   useEffect(() => {
@@ -60,7 +61,8 @@ const Analysis = ({ title, author, OpenAIUrl, apiKey }: Props) => {
       }
     };
     fetchAnalysis();
-  }, []);
+  }, [title]);
+
   // Loading state
 
   if (!text) {
