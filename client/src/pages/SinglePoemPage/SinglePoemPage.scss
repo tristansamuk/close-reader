@@ -24,6 +24,7 @@
     opacity: 0.7;
   }
 }
+
 @keyframes windowOpen {
   from {
     opacity: 0;
@@ -31,7 +32,7 @@
   }
   to {
     scale: 1;
-    opacity: 0.7;
+    opacity: 1;
   }
 }
 
@@ -39,24 +40,16 @@
 
 .appear {
   &-1 {
-    animation: slideUp 500ms ease-in-out;
-    animation-delay: 150ms;
-    animation-fill-mode: backwards;
+    animation: slideUp 500ms ease-in-out 150ms backwards;
   }
   &-2 {
-    animation: slideUp 500ms ease-in-out;
-    animation-delay: 250ms;
-    animation-fill-mode: backwards;
+    animation: slideUp 500ms ease-in-out 250ms backwards;
   }
   &-3 {
-    animation: slideUp 500ms ease-in-out;
-    animation-delay: 350ms;
-    animation-fill-mode: backwards;
+    animation: slideUp 500ms ease-in-out 350ms backwards;
   }
   &-4 {
-    animation: slideUp 500ms ease-in-out;
-    animation-delay: 400ms;
-    animation-fill-mode: backwards;
+    animation: slideUp 500ms ease-in-out 400ms backwards;
   }
 }
 
@@ -107,5 +100,35 @@
     &:hover {
       scale: 1.2;
     }
+  }
+}
+
+.analysis {
+  &__window {
+    animation: windowOpen 500ms ease-in-out backwards;
+    background-color: $bg-secondary;
+    border: none;
+    width: 100%;
+    height: 100%;
+    padding: 1rem 1rem;
+    // Flex
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+    // Position
+    position: absolute;
+    top: 0rem;
+    left: 0rem;
+  }
+  &__text {
+    @include body-copy;
+    animation: slideUp 500ms ease-in-out 1.5s backwards;
+  }
+  &__close-icon {
+    background-color: transparent;
+    border: none;
+    height: 48px;
+    width: 48px;
   }
 }

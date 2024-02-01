@@ -2,7 +2,8 @@ import { useParams } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import "./SinglePoemPage.scss";
-import TeachIcon from "../../components/TeachIcon/TeachIcon";
+import RobotIcon from "../../components/RobotIcon/RobotIcon";
+import closeIcon from "../../assets/images/icons/cross-1.svg";
 import Analysis from "../../components/Analysis/Analysis";
 
 // Types
@@ -17,24 +18,43 @@ interface Poem {
 }
 [];
 
+// interface Analysis {
+//   choices: {
+//     index: number;
+//     messages: {
+//       role: string;
+//       content: string;
+//     };
+//   };
+// }
+// [];
+
 // SVG fill color prop for icon
 
-const fill = "#FFFAF1";
+// const fill = "#FFFAF1";
 
 const SinglePoemPage = ({ apiUrl }: Props) => {
+  const { title } = useParams();
+
   // State for poem and analysis window
   const [poem, setPoem] = useState<Poem | null>(null);
   const [isOpen, setIsOpen] = useState(false);
+  const [isButtonOpen, setIsButtonOpen] = useState(true);
 
-  const { title } = useParams();
-
-  // Click Handler
+  // Click Handlers
 
   const onClickButton = () => {
     setIsOpen(true);
+    setIsButtonOpen(false);
   };
 
-  // On render, make a get request to API and use reponse to update state
+  const onClickClose = () => {
+    setIsOpen(false);
+    setIsButtonOpen(true);
+  };
+
+  // On render, makes a get request to API and uses reponse to update state
+
   useEffect(() => {
     const fetchPoem = async () => {
       try {
@@ -47,7 +67,8 @@ const SinglePoemPage = ({ apiUrl }: Props) => {
     fetchPoem();
   }, []);
 
-  // Show loading state while waiting for API call to update state of `poem`
+  // Shows loading state while waiting for API call to update state of `poem`
+
   if (!poem) {
     return (
       <div className="poem__loading-container">
@@ -67,10 +88,23 @@ const SinglePoemPage = ({ apiUrl }: Props) => {
           </p>
         ))}
       </div>
-      {isOpen && <Analysis title={poem.title} author={poem.author} />}
-      <button onClick={onClickButton} className="poem__analysis-button">
-        <TeachIcon fill={fill} />
-      </button>
+
+      {/* When state of isOpen = true, opens analysis window */}
+      {isOpen && (
+        <div className="analysis__window">
+          <button onClick={onClickClose} className="analysis__close-icon">
+            <img src={closeIcon} alt="close" />
+          </button>
+          <Analysis author={poem.author} title={poem.title} />
+        </div>
+      )}
+      {/* When analy */}
+
+      {isButtonOpen && (
+        <button onClick={onClickButton} className="poem__analysis-button">
+          <RobotIcon fill={"#FFFFFF"} height={"24"} width={"24"} />
+        </button>
+      )}
     </div>
   );
 };

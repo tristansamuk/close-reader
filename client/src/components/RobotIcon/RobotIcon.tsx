@@ -1,14 +1,16 @@
 type Props = {
   fill: string;
+  height: string;
+  width: string;
 };
 
-const TeachIcon = ({ fill }: Props) => {
+const RobotIcon = ({ fill, height, width }: Props) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
-      height="24"
+      height={height} // 24
       viewBox="0 -960 960 960"
-      width="24"
+      width={width} //
       fill={fill}
     >
       <path
@@ -19,4 +21,4 @@ const TeachIcon = ({ fill }: Props) => {
   );
 };
 
-export default TeachIcon;
+export default RobotIcon;

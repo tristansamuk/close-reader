@@ -1,6 +1,7 @@
 // import axios from "axios";
+import RobotIcon from "../RobotIcon/RobotIcon";
 import "./Analysis.scss";
-import closeIcon from "../../assets/images/icons/cross-1.svg";
+import { useState } from "react";
 
 type Props = {
   title: string;
@@ -18,19 +19,24 @@ interface Analysis {
 }
 [];
 
-// This has to be part of the parent element in order to change its display state
-
 const Analysis = ({ title, author }: Props) => {
-  return (
-    <div className="analysis__window">
-      <button className="analysis__close-icon">
-        <img src={closeIcon} alt="close" />
-      </button>
-      <p className="analysis__text">
-        {`Here's an analysis of ${title} by ${author}`}
-      </p>
-    </div>
-  );
+  const [text, setText] = useState<Analysis | null>(null);
+
+  // Loading state
+
+  if (!text) {
+    return (
+      <div className="analysis__loading">
+        <RobotIcon fill={"#666666"} height={"48"} width={"48"} />
+      </div>
+    );
+  }
+
+  //   return (
+  //       <p className="analysis__text">
+  //         {`Sample analysis: ${text}`}
+  //       </p>
+  //   );
 };
 
 export default Analysis;
