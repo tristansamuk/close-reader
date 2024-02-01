@@ -1,4 +1,5 @@
 // import axios from "axios";
+
 import RobotIcon from "../RobotIcon/RobotIcon";
 import "./Analysis.scss";
 import { useState } from "react";
