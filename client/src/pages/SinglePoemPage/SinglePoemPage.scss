@@ -71,9 +71,9 @@
       margin: auto;
     }
     @include desktop {
-      padding-left: 20rem;
       max-width: 1300px;
       margin: auto;
+      padding-left: 7rem;
     }
   }
   &__title {
@@ -96,6 +96,9 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    @include desktop {
+      height: 25%;
+    }
   }
   &__loading-text {
     font-family: $sans-serif;
@@ -123,7 +126,7 @@
       left: 44rem;
     }
     @include desktop {
-      left: 46%;
+      left: 100%;
     }
   }
 }
@@ -150,10 +153,19 @@
     @include tablet {
       padding: 2rem 2rem;
     }
+    @include desktop {
+      width: 30rem;
+      height: 40%;
+      top: 8rem;
+      left: 42rem;
+      overflow: auto;
+      padding: 1.5rem 1rem;
+    }
   }
   &__text {
     @include body-copy;
     animation: slideUp 500ms ease-in-out 1.5s backwards;
+    padding: 0.5rem 0;
   }
   &__close-icon {
     background-color: transparent;
