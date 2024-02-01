@@ -1,5 +1,4 @@
-// import axios from "axios";
-
+import axios from "axios";
 import RobotIcon from "../RobotIcon/RobotIcon";
 import "./Analysis.scss";
 import { useState } from "react";
@@ -20,8 +19,32 @@ interface Analysis {
 }
 [];
 
+// Base URL for server (change to .env variable)
+
+const baseUrl = "http://localhost:8080";
+
 const Analysis = ({ title, author }: Props) => {
   const [text, setText] = useState<Analysis | null>(null);
+
+  const options = {
+    method: "POST",
+    // headers: {
+    //   "Content-Type": "application/json",
+    // },
+    body: {
+      message: "What is poetry?",
+    },
+  };
+
+  const getAnalysis = async () => {
+    try {
+      const response = await axios.get(`${baseUrl}/completions`, options);
+      const analysis = response.data;
+      console.log(analysis);
+    } catch (error) {
+      console.error(error);
+    }
+  };
 
   // Loading state
 

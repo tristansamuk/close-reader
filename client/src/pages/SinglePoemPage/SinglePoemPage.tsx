@@ -7,6 +7,7 @@ import closeIcon from "../../assets/images/icons/cross-1.svg";
 import Analysis from "../../components/Analysis/Analysis";
 
 // Types
+
 type Props = {
   apiUrl: string;
 };
@@ -18,20 +19,8 @@ interface Poem {
 }
 [];
 
-// interface Analysis {
-//   choices: {
-//     index: number;
-//     messages: {
-//       role: string;
-//       content: string;
-//     };
-//   };
-// }
-// [];
-
-// SVG fill color prop for icon
-
-// const fill = "#FFFAF1";
+// Base URL for server (change to .env variable)
+const baseUrl = "http://localhost:8080";
 
 const SinglePoemPage = ({ apiUrl }: Props) => {
   const { title } = useParams();
@@ -39,18 +28,37 @@ const SinglePoemPage = ({ apiUrl }: Props) => {
   // State for poem and analysis window
   const [poem, setPoem] = useState<Poem | null>(null);
   const [isOpen, setIsOpen] = useState(false);
-  const [isButtonOpen, setIsButtonOpen] = useState(true);
+  const [isButtonVisible, setIsButtonVisible] = useState(true);
 
   // Click Handlers
 
   const onClickButton = () => {
     setIsOpen(true);
-    setIsButtonOpen(false);
+    setIsButtonVisible(false);
   };
 
   const onClickClose = () => {
     setIsOpen(false);
-    setIsButtonOpen(true);
+    setIsButtonVisible(true);
+  };
+
+  // OpenAI Get Function
+
+  const getAnalysis = async () => {
+    const options = {
+      method: "POST",
+      body: {
+        message: "how are you?",
+      },
+    };
+
+    try {
+      const response = await axios.get(`${baseUrl}/completions`, options);
+      const analysis = response.data;
+      console.log(analysis);
+    } catch (error) {
+      console.error(error);
+    }
   };
 
   // On render, makes a get request to API and uses reponse to update state
@@ -67,7 +75,7 @@ const SinglePoemPage = ({ apiUrl }: Props) => {
     fetchPoem();
   }, []);
 
-  // Shows loading state while waiting for API call to update state of `poem`
+  // Show loading state while waiting for API call to update state of `poem`
 
   if (!poem) {
     return (
@@ -89,18 +97,18 @@ const SinglePoemPage = ({ apiUrl }: Props) => {
         ))}
       </div>
 
-      {/* When state of isOpen = true, opens analysis window */}
+      {/* When state of isOpen = true, open analysis window */}
       {isOpen && (
         <div className="analysis__window">
           <button onClick={onClickClose} className="analysis__close-icon">
             <img src={closeIcon} alt="close" />
           </button>
-          <Analysis author={poem.author} title={poem.title} />
+          <Analysis baseUrl={baseUrl} author={poem.author} title={poem.title} />
         </div>
       )}
-      {/* When analy */}
+      {/* Analysis button is visible only when analysis window is closed */}
 
-      {isButtonOpen && (
+      {isButtonVisible && (
         <button onClick={onClickButton} className="poem__analysis-button">
           <RobotIcon fill={"#FFFFFF"} height={"24"} width={"24"} />
         </button>
