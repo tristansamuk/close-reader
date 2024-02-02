@@ -74,34 +74,49 @@ const SinglePoemPage = ({ apiUrl }: Props) => {
   }
 
   return (
-    <div className="poem__max-width-container">
-      <h2 className="poem__title appear-1">{poem.title}</h2>
-      <h3 className="poem__author appear-2">{poem.author}</h3>
-      <div className="poem__lines-container appear-3">
-        {poem.lines.map((line, index) => (
-          <p className="poem__line" key={index}>
-            {line}
-          </p>
-        ))}
+    <>
+      <div className="poem__max-width-container">
+        <div className="poem__heading-button-container">
+          <div className="poem__title-author-container">
+            <h2 className="poem__title appear-1">{poem.title}</h2>
+            <h3 className="poem__author appear-2">{poem.author}</h3>
+          </div>
+          {isButtonVisible && (
+            <button
+              onClick={onClickButton}
+              className="poem__analysis-button--desktop"
+            >
+              <RobotIcon fill={"#FFFFFF"} height={"24"} width={"24"} />
+            </button>
+          )}
+        </div>
+        <div className="poem__lines-container appear-3">
+          {poem.lines.map((line, index) => (
+            <p className="poem__line" key={index}>
+              {line}
+            </p>
+          ))}
+        </div>
+
+        {/* When state of isOpen = true, open analysis window */}
+        {isOpen && (
+          <>
+            <div className="analysis__window">
+              <button onClick={onClickClose} className="analysis__close-icon">
+                <img src={closeIcon} alt="close" />
+              </button>
+              <Analysis
+                title={poem.title}
+                author={poem.author}
+                OpenAIUrl={OpenAIUrl}
+                apiKey={apiKey}
+              />
+            </div>
+            <div className="analysis__overlay"></div>
+          </>
+        )}
       </div>
 
-      {/* When state of isOpen = true, open analysis window */}
-      {isOpen && (
-        <>
-          <div className="analysis__window">
-            <button onClick={onClickClose} className="analysis__close-icon">
-              <img src={closeIcon} alt="close" />
-            </button>
-            <Analysis
-              title={poem.title}
-              author={poem.author}
-              OpenAIUrl={OpenAIUrl}
-              apiKey={apiKey}
-            />
-          </div>
-          <div className="analysis__overlay"></div>
-        </>
-      )}
       {/* Analysis button is visible only when analysis window is closed */}
 
       {isButtonVisible && (
@@ -109,7 +124,7 @@ const SinglePoemPage = ({ apiUrl }: Props) => {
           <RobotIcon fill={"#FFFFFF"} height={"24"} width={"24"} />
         </button>
       )}
-    </div>
+    </>
   );
 };
 

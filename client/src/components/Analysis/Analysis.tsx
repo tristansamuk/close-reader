@@ -66,8 +66,11 @@ const Analysis = ({ title, author, OpenAIUrl, apiKey }: Props) => {
 
   if (!text) {
     return (
-      <div className="analysis__loading">
-        <RobotIcon fill={"#666666"} height={"48"} width={"48"} />
+      <div className="analysis__loading-container">
+        <div className="analysis__loading-icon">
+          <RobotIcon fill={"#000000"} height={"32"} width={"32"} />
+        </div>
+        <h3 className="analysis__loading-text">Analyzing...</h3>
       </div>
     );
   }
