@@ -1,6 +1,8 @@
-const AuthorsPage: React.FC = () => {
+import "./AuthorsPage.scss";
+
+const AuthorsPage = () => {
   return (
-    <div>
+    <div className="authors-page__container--max-width">
       <h2>Authors</h2>
     </div>
   );
