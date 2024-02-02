@@ -49,6 +49,17 @@
   }
 }
 
+@mixin page-heading {
+  font-family: $sans-serif;
+  font-weight: $semibold;
+}
+
+@mixin sub-heading {
+  font-family: $sans-serif;
+  font-weight: $semibold;
+  color: $txt-secondary;
+}
+
 @mixin hero-heading {
   font-family: $serif;
   font-weight: $normal;

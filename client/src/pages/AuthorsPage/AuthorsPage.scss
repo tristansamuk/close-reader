@@ -6,5 +6,21 @@
     &--max-width {
       @include container-max-width;
     }
+    &--list {
+      padding: 1rem 0;
+    }
+  }
+  &__heading {
+    @include page-heading;
+  }
+  &__row {
+    border-top: 1px solid lightgrey;
+    padding: 1rem 0;
+    &:first-of-type {
+      border-top: none;
+    }
+  }
+  &__name {
+    @include sub-heading;
   }
 }
