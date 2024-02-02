@@ -60,8 +60,7 @@
     gap: 0.5rem;
   }
   &__logo {
-    letter-spacing: -1.5px;
-    word-spacing: -3px;
+    @include logo;
   }
   &__hamburger {
     @include desktop {

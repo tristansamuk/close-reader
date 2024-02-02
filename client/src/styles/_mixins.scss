@@ -14,7 +14,13 @@
   }
 }
 
-// Text
+// Text Styles
+
+@mixin logo {
+  font-weight: $normal;
+  letter-spacing: -1.5px;
+  word-spacing: -3px;
+}
 
 @mixin nav-items {
   font-family: $sans-serif;
@@ -24,6 +30,18 @@
   transform: translateX(-100vw);
   @include desktop {
     transform: translateX(0);
+  }
+}
+
+@mixin hero-heading {
+  font-family: $serif;
+  font-weight: $normal;
+  color: $txt-primary;
+  font-size: 3rem;
+  line-height: 3.5rem;
+  @include tablet {
+    font-size: 4.5rem;
+    line-height: 4.75rem;
   }
 }
 
@@ -42,13 +60,18 @@
 
 @mixin body-copy {
   font-family: $sans-serif;
-  font-size: 0.75rem;
-  line-height: 1.25rem;
+  line-height: 1.5rem;
+  font-size: 12px;
   font-weight: $normal;
+  @include tablet {
+    font-size: 1rem;
+    line-height: 1.75rem;
+  }
 }
 
 @mixin poem-title {
   font-family: $sans-serif;
+  font-weight: $semibold;
   color: $txt-primary;
 }
 
@@ -61,6 +84,10 @@
 
 @mixin poem-line {
   font-family: $serif;
-  font-size: 1rem;
-  line-height: 1.75rem;
+  font-size: 12px;
+  line-height: 1.5rem;
+  @include tablet {
+    font-size: 1rem;
+    line-height: 1.75rem;
+  }
 }

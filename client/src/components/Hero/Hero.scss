@@ -87,15 +87,10 @@
     }
   }
   &__heading {
-    font-family: $serif;
-    color: $txt-primary;
-    font-size: 3rem;
-    line-height: 3.5rem;
+    @include hero-heading;
     text-align: center;
     max-width: 21rem;
     @include tablet {
-      font-size: 4.5rem;
-      line-height: 4.75rem;
       max-width: 37rem;
     }
     @include desktop {
@@ -104,6 +99,7 @@
   }
   &__subheading {
     font-family: $sans-serif;
+    font-weight: $normal;
     color: $txt-secondary;
     text-align: center;
     font-size: 1.125rem;

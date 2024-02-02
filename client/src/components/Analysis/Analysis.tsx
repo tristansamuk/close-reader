@@ -29,7 +29,7 @@ const Analysis = ({ title, author, OpenAIUrl, apiKey }: Props) => {
   // Request body and headers
 
   const body: Body = {
-    model: "gpt-4",
+    model: "gpt-3.5-turbo",
     messages: [
       {
         role: "system",
