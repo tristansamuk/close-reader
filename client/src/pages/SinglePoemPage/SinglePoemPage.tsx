@@ -14,7 +14,7 @@ import Analysis from "../../components/Analysis/Analysis";
 // Types
 
 type Props = {
-  apiUrl: string;
+  poetryApiUrl: string;
 };
 interface Poem {
   title: string;
@@ -29,7 +29,7 @@ interface Poem {
 const OpenAIUrl = "https://api.openai.com//v1/chat/completions";
 const apiKey = `${import.meta.env.VITE_API_KEY}`;
 
-const SinglePoemPage = ({ apiUrl }: Props) => {
+const SinglePoemPage = ({ poetryApiUrl }: Props) => {
   const { title } = useParams();
 
   // State for poem and analysis window
@@ -54,7 +54,7 @@ const SinglePoemPage = ({ apiUrl }: Props) => {
   useEffect(() => {
     const fetchPoem = async () => {
       try {
-        const response = await axios.get(`${apiUrl}/title/${title}`);
+        const response = await axios.get(`${poetryApiUrl}/title/${title}`);
         setPoem(response.data[0]);
       } catch (error) {
         console.error("Error fetching poem: ", error);

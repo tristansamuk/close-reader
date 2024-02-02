@@ -13,21 +13,24 @@ import SearchPage from "./pages/SearchPage/SearchPage";
 function App() {
   // Change to process.env
   // const baseUrl = "http://localhost:8080";
-  const apiURL: string = "https://poetrydb.org/";
+  const poetryApiUrl: string = "https://poetrydb.org/";
 
   return (
     <BrowserRouter>
       <Header />
       <Routes>
         <Route path="/" element={<HomePage />} />
-        <Route path="/authors" element={<AuthorsPage />} />
+        <Route
+          path="/authors"
+          element={<AuthorsPage poetryApiUrl={poetryApiUrl} />}
+        />
         <Route path="/authors/:name" element={<SingleAuthorPage />} />
         <Route path="/collections/" element={<CollectionsPage />} />
         <Route path="/collections/:title" element={<SingleCollectionPage />} />
         <Route path="/poems" element={<PoemsPage />} />
         <Route
           path="/poems/:title"
-          element={<SinglePoemPage apiUrl={apiURL} />}
+          element={<SinglePoemPage poetryApiUrl={poetryApiUrl} />}
         />
         <Route path="/search" element={<SearchPage />} />
         {/* Search Results page needed? */}
