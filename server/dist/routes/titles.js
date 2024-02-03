@@ -15,40 +15,13 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const router = express_1.default.Router();
 const db_1 = __importDefault(require("../db"));
-// Titles of all poems
-router.get("/all", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+router.get("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const data = yield (0, db_1.default)("titles");
+        const data = yield db_1.default.select("*").from("titles");
         res.json(data);
     }
     catch (_a) {
         res.status(500).send("Error getting poems");
-    }
-}));
-// All lines of all poems
-router.get("/all/lines", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const data = yield (0, db_1.default)("poems");
-        res.json(data);
-    }
-    catch (_b) {
-        res.status(500).send("Error getting poems");
-    }
-}));
-// Lines of poems for a single author
-router.get("/:lastName", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    try {
-        const lastName = req.params.lastName;
-        console.log(lastName);
-        const data = yield (0, db_1.default)("poems")
-            .join("authors", "authors.id", "poems.author_id")
-            .select("poems.id", "authors.id", "poems.lns", "poems.title_id")
-            .where("authors.last_name", lastName);
-        res.json(data);
-    }
-    catch (error) {
-        res.status(500).send("Error getting poems");
-        console.log(error);
     }
 }));
 exports.default = router;

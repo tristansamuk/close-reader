@@ -1,9 +1,14 @@
 import express, { Request, Response } from "express";
 const router = express.Router();
-import authorsData from "../data/authors.json";
+import db from "../db";
 
-router.get("/", (req: Request, res: Response) => {
-  res.status(200).json(authorsData);
+router.get("/", async (req: Request, res: Response) => {
+  try {
+    const data = await db.select("*").from("authors");
+    res.json(data);
+  } catch {
+    res.status(500).send("Error getting authors");
+  }
 });
 
 export default router;
