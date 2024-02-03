@@ -39,10 +39,9 @@ router.get("/all/lines", (req, res) => __awaiter(void 0, void 0, void 0, functio
 router.get("/:lastName", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const lastName = req.params.lastName;
-        console.log(lastName);
         const data = yield (0, db_1.default)("poems")
             .join("authors", "authors.id", "poems.author_id")
-            .select("poems.id", "authors.id", "poems.lns", "poems.title_id")
+            .select("poems.id", "authors.id", "poems.lns")
             .where("authors.last_name", lastName);
         res.json(data);
     }

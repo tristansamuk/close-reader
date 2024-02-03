@@ -31,7 +31,7 @@ router.get("/:lastName", async (req: Request, res: Response) => {
     const lastName = req.params.lastName;
     const data = await db("poems")
       .join("authors", "authors.id", "poems.author_id")
-      .select("poems.id", "authors.id", "poems.lns", "poems.title_id")
+      .select("poems.id", "authors.id", "poems.lns")
       .where("authors.last_name", lastName);
     res.json(data);
   } catch (error) {
