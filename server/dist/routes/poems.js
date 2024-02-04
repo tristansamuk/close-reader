@@ -35,14 +35,14 @@ router.get("/all/lines", (req, res) => __awaiter(void 0, void 0, void 0, functio
         res.status(500).send("Error getting poems");
     }
 }));
-// List of poems by a single author
+// List of poems by a single poet
 router.get("/:authorName", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const authorName = req.params.authorName;
         const data = yield (0, db_1.default)("titles")
-            .join("authors", "authors.author_id", "titles.author_id")
-            .select("titles.title_id", "authors.first_name", "authors.last_name", "titles.title")
-            .where("authors.url_param", authorName);
+            .join("poets", "poets.poet_id", "titles.poet_id")
+            .select("titles.title_id", "poets.first_name", "poets.last_name", "titles.title")
+            .where("poets.url_param", authorName);
         res.json(data);
     }
     catch (error) {

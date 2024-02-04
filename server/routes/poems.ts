@@ -24,20 +24,20 @@ router.get("/all/lines", async (req: Request, res: Response) => {
   }
 });
 
-// List of poems by a single author
+// List of poems by a single poet
 
 router.get("/:authorName", async (req: Request, res: Response) => {
   try {
     const authorName = req.params.authorName;
     const data = await db("titles")
-      .join("authors", "authors.author_id", "titles.author_id")
+      .join("poets", "poets.poet_id", "titles.poet_id")
       .select(
         "titles.title_id",
-        "authors.first_name",
-        "authors.last_name",
+        "poets.first_name",
+        "poets.last_name",
         "titles.title"
       )
-      .where("authors.url_param", authorName);
+      .where("poets.url_param", authorName);
     res.json(data);
   } catch (error) {
     res.status(500).send("Error getting poems");
