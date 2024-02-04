@@ -49,8 +49,6 @@ router.get("/:authorName", async (req: Request, res: Response) => {
 router.get("/titles/:poemTitle", async (req: Request, res: Response) => {
   try {
     const poemTitle = req.params.poemTitle;
-    const;
-
     const data = await db("poems")
       .join("titles", "poems.title_id", "titles.title_id")
       .select("poems.id", "poems.lns")
