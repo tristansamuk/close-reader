@@ -51,7 +51,7 @@ router.get("/:authorName", (req, res) => __awaiter(void 0, void 0, void 0, funct
     }
 }));
 // Single Poem
-router.get("/title/:poemTitle", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+router.get("/titles/:poemTitle", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const poemTitle = req.params.poemTitle;
         const data = yield (0, db_1.default)("poems")
