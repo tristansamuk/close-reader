@@ -35,14 +35,29 @@ router.get("/all/lines", (req, res) => __awaiter(void 0, void 0, void 0, functio
         res.status(500).send("Error getting poems");
     }
 }));
-// Lines of poems for a single author
-router.get("/:lastName", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+// List of poems by a single author
+router.get("/:authorName", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const lastName = req.params.lastName;
+        const authorName = req.params.authorName;
+        const data = yield (0, db_1.default)("titles")
+            .join("authors", "authors.author_id", "titles.author_id")
+            .select("titles.title_id", "authors.first_name", "authors.last_name", "titles.title")
+            .where("authors.url_param", authorName);
+        res.json(data);
+    }
+    catch (error) {
+        res.status(500).send("Error getting poems");
+        console.log(error);
+    }
+}));
+// Single Poem
+router.get("/title/:poemTitle", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const poemTitle = req.params.poemTitle;
         const data = yield (0, db_1.default)("poems")
-            .join("authors", "authors.id", "poems.author_id")
-            .select("poems.id", "authors.id", "poems.lns")
-            .where("authors.last_name", lastName);
+            .join("titles", "poems.title_id", "titles.title_id")
+            .select("poems.id", "poems.lns")
+            .where("titles.short_title", poemTitle);
         res.json(data);
     }
     catch (error) {

@@ -24,15 +24,38 @@ router.get("/all/lines", async (req: Request, res: Response) => {
   }
 });
 
-// Lines of poems for a single author
+// List of poems by a single author
 
-router.get("/:lastName", async (req: Request, res: Response) => {
+router.get("/:authorName", async (req: Request, res: Response) => {
   try {
-    const lastName = req.params.lastName;
+    const authorName = req.params.authorName;
+    const data = await db("titles")
+      .join("authors", "authors.author_id", "titles.author_id")
+      .select(
+        "titles.title_id",
+        "authors.first_name",
+        "authors.last_name",
+        "titles.title"
+      )
+      .where("authors.url_param", authorName);
+    res.json(data);
+  } catch (error) {
+    res.status(500).send("Error getting poems");
+    console.log(error);
+  }
+});
+
+// Single Poem
+router.get("/titles/:poemTitle", async (req: Request, res: Response) => {
+  try {
+    const poemTitle = req.params.poemTitle;
+    const;
+
     const data = await db("poems")
-      .join("authors", "authors.id", "poems.author_id")
-      .select("poems.id", "authors.id", "poems.lns")
-      .where("authors.last_name", lastName);
+      .join("titles", "poems.title_id", "titles.title_id")
+      .select("poems.id", "poems.lns")
+      .where("titles.short_title", poemTitle);
+
     res.json(data);
   } catch (error) {
     res.status(500).send("Error getting poems");
