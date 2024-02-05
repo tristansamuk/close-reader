@@ -110,8 +110,8 @@ const SinglePoemPage = ({ poetryApiUrl }: Props) => {
       <div className="poem__max-width-container">
         <div className="poem__heading-button-container">
           <div className="poem__title-author-container">
-            <h2 className="poem__title appear-1">{poem.title}</h2>
-            <h3 className="poem__author appear-2">{poem.author}</h3>
+            <h2 className="poem__title appear-1">{poemInfo?.title}</h2>
+            <h3 className="poem__author appear-2">{`${poemInfo?.first_name} ${poemInfo?.last_name}`}</h3>
           </div>
           {isButtonVisible && (
             <button
@@ -139,8 +139,8 @@ const SinglePoemPage = ({ poetryApiUrl }: Props) => {
                 <img src={closeIcon} alt="close" />
               </button>
               <Analysis
-                title={poem.title}
-                author={poem.author}
+                title={poemInfo.title}
+                author={poemInfo.poet}
                 OpenAIUrl={OpenAIUrl}
                 apiKey={apiKey}
               />
