@@ -29,7 +29,7 @@ const SinglePoemPage = ({ poetryApiUrl }: Props) => {
 
   // Initial state for page elements
 
-  const [poemInfo, setPoemInfo] = useState<PoemInfo | null>(null); // set type here
+  const [poemInfo, setPoemInfo] = useState<PoemInfo | null>(null);
   const [poem, setPoem] = useState<string[]>([""]);
   const [isOpen, setIsOpen] = useState(false);
   const [isButtonVisible, setIsButtonVisible] = useState(true);
@@ -49,11 +49,12 @@ const SinglePoemPage = ({ poetryApiUrl }: Props) => {
   // Make a GET request to database using url param stored in `title` to update state of author and title
 
   useEffect(() => {
-    const fetchTitleAndAuthor = async (titleParam: string) => {
+    const fetchTitleAndAuthor = async (titleParam?: string) => {
       try {
-        const response = await axios.get(`${poetryApiUrl}/poems/info/${title}`);
+        const response = await axios.get(
+          `${poetryApiUrl}/poems/info/${titleParam}`
+        );
         setPoemInfo(response.data[0]);
-        console.log(poemInfo);
       } catch (error) {
         console.error("Error fetching title and poet name: ", error);
       }
@@ -95,9 +96,9 @@ const SinglePoemPage = ({ poetryApiUrl }: Props) => {
     fetchPoem();
   }, []);
 
-  // Show a loading state while waiting for the GET request to update state of `poem`
+  // Show a loading state while waiting for the GET requests to update state of `poem` and `poemInfo`
 
-  if (!poem) {
+  if (!poem || !poemInfo) {
     return (
       <div className="poem__loading-container">
         <h2 className="poem__loading-text">Loading...</h2>
@@ -111,7 +112,7 @@ const SinglePoemPage = ({ poetryApiUrl }: Props) => {
         <div className="poem__heading-button-container">
           <div className="poem__title-author-container">
             <h2 className="poem__title appear-1">{poemInfo?.title}</h2>
-            <h3 className="poem__author appear-2">{`${poemInfo?.first_name} ${poemInfo?.last_name}`}</h3>
+            <h3 className="poem__author appear-2">{`${poemInfo.first_name} ${poemInfo.last_name}`}</h3>
           </div>
           {isButtonVisible && (
             <button
@@ -140,7 +141,7 @@ const SinglePoemPage = ({ poetryApiUrl }: Props) => {
               </button>
               <Analysis
                 title={poemInfo.title}
-                author={poemInfo.poet}
+                author={`${poemInfo.first_name} ${poemInfo.last_name}`}
                 OpenAIUrl={OpenAIUrl}
                 apiKey={apiKey}
               />
