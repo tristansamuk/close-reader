@@ -11,14 +11,13 @@ import Analysis from "../../components/Analysis/Analysis";
 type Props = {
   poetryApiUrl: string;
 };
-interface Poem {
-  // TODO: Change this to an array of strings
+
+interface PoemInfo {
+  first_name: string;
+  last_name: string;
   title: string;
-  author: string;
-  lines: string[];
-  linecount: string;
+  pub_year: number;
 }
-[];
 
 // Variables for OpenAI API
 
@@ -30,8 +29,8 @@ const SinglePoemPage = ({ poetryApiUrl }: Props) => {
 
   // Initial state for page elements
 
-  const [poemHeading, setPoemHeading] = useState(""); // set type here
-  const [poem, setPoem] = useState<Poem | string[]>([""]);
+  const [poemInfo, setPoemInfo] = useState<PoemInfo | null>(null); // set type here
+  const [poem, setPoem] = useState<string[]>([""]);
   const [isOpen, setIsOpen] = useState(false);
   const [isButtonVisible, setIsButtonVisible] = useState(true);
 
@@ -50,9 +49,11 @@ const SinglePoemPage = ({ poetryApiUrl }: Props) => {
   // Make a GET request to database using url param stored in `title` to update state of author and title
 
   useEffect(() => {
-    const fetchTitleAndAuthor = async (a: string) => {
+    const fetchTitleAndAuthor = async (titleParam: string) => {
       try {
-        const response = await axios.get(`${poetryApiUrl}`); // Add full url here
+        const response = await axios.get(`${poetryApiUrl}/poems/info/${title}`);
+        setPoemInfo(response.data[0]);
+        console.log(poemInfo);
       } catch (error) {
         console.error("Error fetching title and poet name: ", error);
       }
