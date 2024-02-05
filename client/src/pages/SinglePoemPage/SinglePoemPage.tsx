@@ -6,18 +6,13 @@ import RobotIcon from "../../components/RobotIcon/RobotIcon";
 import closeIcon from "../../assets/images/icons/cross-1.svg";
 import Analysis from "../../components/Analysis/Analysis";
 
-// Joan's Design advice
-
-// On loading, have static text that says "Loading..." below pulsing robot
-// On desktop, align left margin with center and have analysis pop out beside
-
 // Types
 
 type Props = {
   poetryApiUrl: string;
 };
 interface Poem {
-  // Change this to an array of strings
+  // TODO: Change this to an array of strings
   title: string;
   author: string;
   lines: string[];
@@ -33,7 +28,9 @@ const apiKey = `${import.meta.env.VITE_API_KEY}`;
 const SinglePoemPage = ({ poetryApiUrl }: Props) => {
   const { title } = useParams();
 
-  // State for poem and analysis window
+  // Initial state for page elements
+
+  const [poemHeading, setPoemHeading] = useState(""); // set type here
   const [poem, setPoem] = useState<Poem | string[]>([""]);
   const [isOpen, setIsOpen] = useState(false);
   const [isButtonVisible, setIsButtonVisible] = useState(true);
@@ -50,7 +47,20 @@ const SinglePoemPage = ({ poetryApiUrl }: Props) => {
     setIsButtonVisible(true);
   };
 
-  // On render, makes a GET request to API and uses reponse to update state
+  // Make a GET request to database using url param stored in `title` to update state of author and title
+
+  useEffect(() => {
+    const fetchTitleAndAuthor = async (a: string) => {
+      try {
+        const response = await axios.get(`${poetryApiUrl}`); // Add full url here
+      } catch (error) {
+        console.error("Error fetching title and poet name: ", error);
+      }
+    };
+    fetchTitleAndAuthor(title);
+  }, []);
+
+  // Make a GET request to database and use the reponse to set the state of `poem`
 
   useEffect(() => {
     const fetchPoem = async () => {
@@ -59,12 +69,13 @@ const SinglePoemPage = ({ poetryApiUrl }: Props) => {
           `${poetryApiUrl}/poems/titles/${title}`
         );
         const poemData = response.data;
-        console.log(response.data);
 
-        // Creates an empty array to hold the lines of the poem to be rendered
+        // Create an empty array to hold the lines of the poem
+
         let linesArray: string[] = [];
 
-        // Takes values for `lns` in `poemData` and push each string to `linesArray`
+        // Take the values for `lns` (strings) in `poemData` and push them to `linesArray`
+
         const createLinesArray = (poem: any) => {
           for (let i = 0; i < poemData.length; i++) {
             linesArray.push(poem[i].lns);
@@ -73,7 +84,8 @@ const SinglePoemPage = ({ poetryApiUrl }: Props) => {
         };
         createLinesArray(poemData);
 
-        // Sets the state of `poem` to `linesArray`
+        // Set the state of `poem` to `linesArray`
+
         setPoem(linesArray);
       } catch (error) {
         console.error("Error fetching poem: ", error);
@@ -82,7 +94,7 @@ const SinglePoemPage = ({ poetryApiUrl }: Props) => {
     fetchPoem();
   }, []);
 
-  // Show loading state while waiting for API call to update state of `poem`
+  // Show a loading state while waiting for the GET request to update state of `poem`
 
   if (!poem) {
     return (
@@ -91,7 +103,7 @@ const SinglePoemPage = ({ poetryApiUrl }: Props) => {
       </div>
     );
   }
-  console.log(poem); // This works
+
   return (
     <>
       <div className="poem__max-width-container">
@@ -111,11 +123,14 @@ const SinglePoemPage = ({ poetryApiUrl }: Props) => {
         </div>
         <div className="poem__lines-container appear-3">
           {poem.map((line, index) => (
-            <p className="poem__line">{line}</p>
+            <p className="poem__line" key={index}>
+              {line}
+            </p>
           ))}
         </div>
 
-        {/* When state of isOpen = true, open analysis window */}
+        {/* When state of `isOpen` is `true`, open the analysis window */}
+
         {isOpen && (
           <>
             <div className="analysis__window">
@@ -134,7 +149,7 @@ const SinglePoemPage = ({ poetryApiUrl }: Props) => {
         )}
       </div>
 
-      {/* Analysis button is visible only when analysis window is closed */}
+      {/* Only show the Analysis button when the analysis window is closed */}
 
       {isButtonVisible && (
         <button onClick={onClickButton} className="poem__analysis-button">
