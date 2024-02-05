@@ -13,7 +13,7 @@ import SearchPage from "./pages/SearchPage/SearchPage";
 function App() {
   // Change to process.env
   // const baseUrl = "http://localhost:8080";
-  const poetryApiUrl: string = "https://poetrydb.org/";
+  const poetryApiUrl: string = "http://localhost:8080";
 
   return (
     <BrowserRouter>

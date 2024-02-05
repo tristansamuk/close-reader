@@ -60,7 +60,7 @@ const Analysis = ({ title, author, OpenAIUrl, apiKey }: Props) => {
       }
     };
     fetchAnalysis();
-  }, [title]);
+  }, []);
 
   // Loading state
 

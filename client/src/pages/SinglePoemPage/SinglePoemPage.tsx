@@ -17,6 +17,7 @@ type Props = {
   poetryApiUrl: string;
 };
 interface Poem {
+  // Change this to an array of strings
   title: string;
   author: string;
   lines: string[];
@@ -33,7 +34,7 @@ const SinglePoemPage = ({ poetryApiUrl }: Props) => {
   const { title } = useParams();
 
   // State for poem and analysis window
-  const [poem, setPoem] = useState<Poem | null>(null);
+  const [poem, setPoem] = useState<Poem | string[]>([""]);
   const [isOpen, setIsOpen] = useState(false);
   const [isButtonVisible, setIsButtonVisible] = useState(true);
 
@@ -49,13 +50,31 @@ const SinglePoemPage = ({ poetryApiUrl }: Props) => {
     setIsButtonVisible(true);
   };
 
-  // On render, makes a get request to API and uses reponse to update state
+  // On render, makes a GET request to API and uses reponse to update state
 
   useEffect(() => {
     const fetchPoem = async () => {
       try {
-        const response = await axios.get(`${poetryApiUrl}/title/${title}`);
-        setPoem(response.data[0]);
+        const response = await axios.get(
+          `${poetryApiUrl}/poems/titles/${title}`
+        );
+        const poemData = response.data;
+        console.log(response.data);
+
+        // Creates an empty array to hold the lines of the poem to be rendered
+        let linesArray: string[] = [];
+
+        // Takes values for `lns` in `poemData` and push each string to `linesArray`
+        const createLinesArray = (poem: any) => {
+          for (let i = 0; i < poemData.length; i++) {
+            linesArray.push(poem[i].lns);
+          }
+          return linesArray;
+        };
+        createLinesArray(poemData);
+
+        // Sets the state of `poem` to `linesArray`
+        setPoem(linesArray);
       } catch (error) {
         console.error("Error fetching poem: ", error);
       }
@@ -72,7 +91,7 @@ const SinglePoemPage = ({ poetryApiUrl }: Props) => {
       </div>
     );
   }
-
+  console.log(poem); // This works
   return (
     <>
       <div className="poem__max-width-container">
@@ -91,10 +110,8 @@ const SinglePoemPage = ({ poetryApiUrl }: Props) => {
           )}
         </div>
         <div className="poem__lines-container appear-3">
-          {poem.lines.map((line, index) => (
-            <p className="poem__line" key={index}>
-              {line}
-            </p>
+          {poem.map((line, index) => (
+            <p className="poem__line">{line}</p>
           ))}
         </div>
 
