@@ -15,7 +15,8 @@ router.get("/all", async (req: Request, res: Response) => {
         "poets.first_name",
         "poets.last_name",
         "titles.pub_year"
-      );
+      )
+      .orderBy("titles.title");
     res.json(data);
   } catch (error) {
     res.status(500).send("Error getting poems");

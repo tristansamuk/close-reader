@@ -20,7 +20,8 @@ router.get("/all", (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     try {
         const data = yield (0, db_1.default)("titles")
             .join("poets", "poets.id", "titles.poet_id")
-            .select("titles.id", "titles.title", "titles.short_title", "poets.first_name", "poets.last_name", "titles.pub_year");
+            .select("titles.id", "titles.title", "titles.short_title", "poets.first_name", "poets.last_name", "titles.pub_year")
+            .orderBy("titles.title");
         res.json(data);
     }
     catch (error) {
