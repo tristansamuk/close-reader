@@ -24,7 +24,10 @@ const Analysis = ({ title, poetryApiUrl }: Props) => {
         console.log("Error fetching: ", error);
       }
     };
-    fetchAnalysis();
+    setTimeout(() => {
+      // Simulates loading a response directly from Chat-GPT. Will connect directly on next sprint, but was a bit unpredictable to rely on for live demo.
+      fetchAnalysis();
+    }, 5000);
   }, []);
 
   // Loading state
