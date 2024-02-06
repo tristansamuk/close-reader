@@ -13,6 +13,7 @@ import SearchPage from "./pages/SearchPage/SearchPage";
 function App() {
   // Change to process.env
   const poetryApiUrl: string = "http://localhost:8080";
+  const clientUrl: string = "http://localhost:5173";
 
   return (
     <BrowserRouter>
@@ -23,12 +24,17 @@ function App() {
           path="/poets"
           element={<PoetsPage poetryApiUrl={poetryApiUrl} />}
         />
-        <Route path="/poets/:name" element={<SinglePoetPage />} />
+        <Route
+          path="/poets/:name"
+          element={<SinglePoetPage clientUrl={clientUrl} />}
+        />
         <Route path="/collections/" element={<CollectionsPage />} />
         <Route path="/collections/:title" element={<SingleCollectionPage />} />
         <Route
           path="/poems"
-          element={<PoemsPage poetryApiUrl={poetryApiUrl} />}
+          element={
+            <PoemsPage poetryApiUrl={poetryApiUrl} clientUrl={clientUrl} />
+          }
         />
         <Route
           path="/poems/:title"

@@ -1,3 +1,6 @@
+@use "../../styles/mixins" as *;
+@use "../../styles/variables" as *;
+
 // Animations
 
 @keyframes loading {
@@ -20,7 +23,7 @@
   }
 }
 
-.poets-page {
+.poet-page {
   &__container {
     &--max-width {
       @include container-max-width;

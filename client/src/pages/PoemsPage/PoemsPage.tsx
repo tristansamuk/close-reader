@@ -7,6 +7,7 @@ import axios from "axios";
 
 interface Props {
   poetryApiUrl: string;
+  clientUrl: string;
 }
 
 interface Poem {
@@ -18,9 +19,7 @@ interface Poem {
   pub_year: number;
 }
 
-const baseUrl = "http://localhost:5173";
-
-const PoemsPage = ({ poetryApiUrl }: Props) => {
+const PoemsPage = ({ poetryApiUrl, clientUrl }: Props) => {
   const [poemsList, setPoemsList] = useState<Poem[] | null>(null);
 
   useEffect(() => {
@@ -49,7 +48,7 @@ const PoemsPage = ({ poetryApiUrl }: Props) => {
         {poemsList.map((poem: Poem) => {
           return (
             <div key={poem.id} className="poems-page__row">
-              <Link to={`${baseUrl}/poems/${poem.short_title}`}>
+              <Link to={`${clientUrl}/poems/${poem.short_title}`}>
                 <h4 className="poems-page__title">{`${poem.title}`}</h4>
                 <div className="poems-page__container--name-year">
                   <p
