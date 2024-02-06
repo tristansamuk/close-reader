@@ -23,11 +23,11 @@ app.get("/", (req: Request, res: Response) => {
 // Routes
 
 import collectionsRouter from "./routes/collections";
-import authorsRouter from "./routes/authors";
+import poetsRouter from "./routes/poets";
 import poemsRouter from "./routes/poems";
 
 app.use("/collections", collectionsRouter);
-app.use("/authors", authorsRouter);
+app.use("/poets", poetsRouter);
 app.use("/poems", poemsRouter);
 
 // OpenAI
