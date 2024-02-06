@@ -8,17 +8,23 @@ interface Props {
   poetryApiUrl: string;
 }
 
-// interface Poets
+interface Poet {
+  id: number;
+  first_name: string;
+  last_name: string;
+  birth_year: number;
+  death_year: number;
+  img: string;
+}
 
 const PoetsPage = ({ poetryApiUrl }: Props) => {
-  const [poetsList, setPoetsList] = useState("");
+  const [poetsList, setPoetsList] = useState<Poet[] | null>(null);
 
   useEffect(() => {
     const fetchPoets = async () => {
       try {
         const response = await axios.get(`${poetryApiUrl}/poets`);
         setPoetsList(response.data);
-        console.log(poetsList);
       } catch (error) {
         console.error(error);
       }
@@ -26,13 +32,28 @@ const PoetsPage = ({ poetryApiUrl }: Props) => {
     fetchPoets();
   }, []);
 
+  if (!poetsList) {
+    return (
+      <div className="poets-page__loading-container">
+        <h2 className="poets-page__loading-text">Loading...</h2>
+      </div>
+    );
+  }
+
   return (
     <div className="poets-page__container--max-width">
-      <h2 className="poets-page__heading">Authors</h2>
+      <h2 className="poets-page__heading">Poets</h2>
       <div className="poets-page__container--list">
-        <div className="poets-page__row">
-          <h3 className="poets-page__name">William Wordsworth</h3>
-        </div>
+        {poetsList.map((poet) => {
+          return (
+            <div key={poet.id} className="poets-page__row">
+              <h3
+                key={poet.id}
+                className="poets-page__name"
+              >{`${poet.first_name} ${poet.last_name}`}</h3>
+            </div>
+          );
+        })}
       </div>
     </div>
   );
