@@ -4,10 +4,6 @@ import magnifyingGlass from "../../assets/images/icons/magnifying-glass.svg";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
-// TODO
-// - Add page links to routes
-// - Set max width container for tablet and desktop with margin auto
-
 const Header: React.FC = () => {
   const [isOpen, setOpen] = useState<boolean>(false);
 
@@ -40,7 +36,7 @@ const Header: React.FC = () => {
               <Link to={"/"}>Home</Link>
             </li>
             <li className="header__nav-item--desk">
-              <Link to={"authors"}>Authors</Link>
+              <Link to={"poets"}>Poets</Link>
             </li>
             <li className="header__nav-item--desk">
               <Link to={"poems"}>Poems</Link>
@@ -69,8 +65,8 @@ const Header: React.FC = () => {
                 </Link>
               </li>
               <li className="header__nav-item--3">
-                <Link onClick={handleClickMenu} to={"authors"}>
-                  Authors
+                <Link onClick={handleClickMenu} to={"poets"}>
+                  Poets
                 </Link>
               </li>
               <li className="header__nav-item--3">

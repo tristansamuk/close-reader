@@ -1,6 +1,28 @@
 @use "../../styles/mixins" as *;
 @use "../../styles/variables" as *;
 
+// Animations
+
+@keyframes loading {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    transform: translateY(+10px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0px);
+    opacity: 1;
+  }
+}
+
 .poets-page {
   &__container {
     &--max-width {
@@ -12,8 +34,10 @@
   }
   &__heading {
     @include page-heading;
+    animation: slideUp 500ms ease-in-out 100ms backwards;
   }
   &__row {
+    animation: slideUp 500ms ease-in-out 200ms backwards;
     display: flex;
     justify-content: flex-start;
     align-items: center;
@@ -25,6 +49,7 @@
     }
   }
   &__poet-pic {
+    animation: slideUp 500ms ease-in-out 300ms backwards;
     height: 3rem;
     width: 3rem;
     object-fit: cover;
@@ -32,6 +57,10 @@
     border-radius: $bdr-radius-lg;
   }
   &__name {
+    animation: slideUp 500ms ease-in-out 400ms backwards;
     @include sub-heading;
+  }
+  &__loading-container {
+    animation: slideUp 500ms ease-in-out 1s backwards;
   }
 }

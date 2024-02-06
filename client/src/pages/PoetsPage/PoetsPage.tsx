@@ -48,10 +48,10 @@ const PoetsPage = ({ poetryApiUrl }: Props) => {
           return (
             <div key={poet.id} className="poets-page__row">
               <img src={poet.img} alt="" className="poets-page__poet-pic" />
-              <h3
+              <h4
                 key={poet.id}
                 className="poets-page__name"
-              >{`${poet.first_name} ${poet.last_name}`}</h3>
+              >{`${poet.first_name} ${poet.last_name}`}</h4>
             </div>
           );
         })}
