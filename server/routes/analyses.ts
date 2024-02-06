@@ -9,7 +9,7 @@ router.get("/:poemTitle", async (req: Request, res: Response) => {
     const poemTitle = req.params.poemTitle;
     const data = await db("analyses")
       .join("titles", "titles.id", "analyses.title_id")
-      .select("analyses.id", "analyses.analysis")
+      .select("analyses.id", "analyses.analysis", "titles.short_title")
       .where("titles.short_title", poemTitle);
     res.status(200).json(data);
   } catch (error) {

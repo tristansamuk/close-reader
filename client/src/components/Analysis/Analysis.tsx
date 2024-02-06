@@ -7,56 +7,21 @@ import "./Analysis.scss";
 
 interface Props {
   title: string;
-  author: string;
-  OpenAIUrl: string;
-  apiKey: string;
+  poetryApiUrl: string;
 }
 
-interface Body {
-  model: string;
-  messages: {
-    role: string;
-    content: string;
-  }[];
-  temperature: number;
-  max_tokens?: number;
-  stream?: boolean;
-}
-
-const Analysis = ({ title, author, OpenAIUrl, apiKey }: Props) => {
+const Analysis = ({ title, poetryApiUrl }: Props) => {
   const [text, setText] = useState<string | null>(null);
-
-  // Request body and headers
-
-  const body: Body = {
-    model: "gpt-3.5-turbo",
-    messages: [
-      {
-        role: "system",
-        content:
-          "You are poetry expert. When you receive a poem title, please generate a short interpretive analysis that will help a reader understand what the poem is about, any interesting things to pay attention to, and situate the poem in its historical or biographical context. Never include a heading in your response",
-      },
-      {
-        role: "user",
-        content: `${title} by ${author}`,
-      },
-    ],
-    temperature: 0.7,
-  };
 
   useEffect(() => {
     const fetchAnalysis = async () => {
       try {
-        const response = await axios.post(`${OpenAIUrl}`, body, {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${apiKey}`,
-          },
-        });
-        const analysis: string = response.data.choices[0].message.content;
-        setText(analysis);
+        const response = await axios.get(`${poetryApiUrl}/analyses/${title}`);
+        console.log(response);
+        const foundAnalysis = response.data[0].analysis;
+        setText(foundAnalysis);
       } catch (error) {
-        console.log(error);
+        console.log("Error fetching: ", error);
       }
     };
     fetchAnalysis();

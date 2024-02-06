@@ -11,18 +11,12 @@ import Analysis from "../../components/Analysis/Analysis";
 type Props = {
   poetryApiUrl: string;
 };
-
 interface PoemInfo {
   first_name: string;
   last_name: string;
   title: string;
   pub_year: number;
 }
-
-// Variables for OpenAI API
-
-const OpenAIUrl = "https://api.openai.com//v1/chat/completions";
-const apiKey = `${import.meta.env.VITE_API_KEY}`;
 
 const SinglePoemPage = ({ poetryApiUrl }: Props) => {
   const { title } = useParams();
@@ -139,12 +133,7 @@ const SinglePoemPage = ({ poetryApiUrl }: Props) => {
               <button onClick={onClickClose} className="analysis__close-icon">
                 <img src={closeIcon} alt="close" />
               </button>
-              <Analysis
-                title={poemInfo.title}
-                author={`${poemInfo.first_name} ${poemInfo.last_name}`}
-                OpenAIUrl={OpenAIUrl}
-                apiKey={apiKey}
-              />
+              <Analysis title={`${title}`} poetryApiUrl={`${poetryApiUrl}`} />
             </div>
             <div className="analysis__overlay"></div>
           </>

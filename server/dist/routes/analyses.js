@@ -15,7 +15,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const router = express_1.default.Router();
 const db_1 = __importDefault(require("../db"));
-// Get analysis
+// GET analysis of a poem
 router.get("/:poemTitle", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const poemTitle = req.params.poemTitle;
@@ -34,7 +34,7 @@ exports.default = router;
 // POST analysis
 router.post("/", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const newPoem = yield (0, db_1.default)("analyses").insert(req.body);
+        const newAnalysis = yield (0, db_1.default)("analyses").insert(req.body);
         res.status(201).json(req.body);
     }
     catch (error) {
