@@ -17,7 +17,9 @@ const router = express_1.default.Router();
 const db_1 = __importDefault(require("../db"));
 router.get("/", (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const data = yield (0, db_1.default)("poets").select("poets.id", "poets.first_name", "poets.last_name", "poets.birth_year", "poets.death_year", "poets.img");
+        const data = yield (0, db_1.default)("poets")
+            .select("poets.id", "poets.first_name", "poets.last_name", "poets.birth_year", "poets.death_year", "poets.img")
+            .orderBy("last_name");
         res.status(200).json(data);
     }
     catch (_a) {
