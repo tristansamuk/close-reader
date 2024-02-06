@@ -1,3 +1,4 @@
+import { Link } from "react-router-dom";
 import "./PoemsPage.scss";
 import { useState, useEffect } from "react";
 import axios from "axios";
@@ -16,6 +17,8 @@ interface Poem {
   last_name: string;
   pub_year: number;
 }
+
+const baseUrl = "http://localhost:5173";
 
 const PoemsPage = ({ poetryApiUrl }: Props) => {
   const [poemsList, setPoemsList] = useState<Poem[] | null>(null);
@@ -46,14 +49,16 @@ const PoemsPage = ({ poetryApiUrl }: Props) => {
         {poemsList.map((poem: Poem) => {
           return (
             <div key={poem.id} className="poems-page__row">
-              <h4 className="poems-page__title">{`${poem.title}`}</h4>
-              <p
-                key={poem.title}
-                className="poems-page__name"
-              >{`${poem.first_name} ${poem.last_name}`}</p>
-              <p key={poem.short_title} className="poems-page_year">
-                {`${poem.pub_year}`}
-              </p>
+              <Link to={`${baseUrl}/poems/${poem.short_title}`}>
+                <h4 className="poems-page__title">{`${poem.title}`}</h4>
+                <p
+                  key={poem.title}
+                  className="poems-page__name"
+                >{`${poem.first_name} ${poem.last_name}`}</p>
+                <p key={poem.short_title} className="poems-page_year">
+                  {`${poem.pub_year}`}
+                </p>
+              </Link>
             </div>
           );
         })}
