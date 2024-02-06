@@ -17,11 +17,10 @@ const Analysis = ({ title, poetryApiUrl }: Props) => {
     const fetchAnalysis = async () => {
       try {
         const response = await axios.get(`${poetryApiUrl}/analyses/${title}`);
-        console.log(response);
         const foundAnalysis = response.data[0].analysis;
         setText(foundAnalysis);
       } catch (error) {
-        console.log("Error fetching: ", error);
+        console.log("Error fetching analysis: ", error);
       }
     };
     setTimeout(() => {
