@@ -1,7 +1,7 @@
 @use "../../styles/mixins" as *;
 @use "../../styles/variables" as *;
 
-.authors-page {
+.poets-page {
   &__container {
     &--max-width {
       @include container-max-width;

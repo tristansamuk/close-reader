@@ -2,7 +2,7 @@ import "./App.scss";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "./components/Header/Header";
 import HomePage from "./pages/HomePage/HomePage";
-import AuthorsPage from "./pages/AuthorsPage/AuthorsPage";
+import PoetsPage from "./pages/PoetsPage/PoetsPage";
 import SingleAuthorPage from "./pages/SingleAuthorPage/SingleAuthorPage";
 import CollectionsPage from "./pages/CollectionsPage/CollectionsPage";
 import SingleCollectionPage from "./pages/SingleCollectionPage/SingleCollectionPage";
@@ -21,10 +21,10 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route
-          path="/authors"
-          element={<AuthorsPage poetryApiUrl={poetryApiUrl} />}
+          path="/poets"
+          element={<PoetsPage poetryApiUrl={poetryApiUrl} />}
         />
-        <Route path="/authors/:name" element={<SingleAuthorPage />} />
+        <Route path="/poets/:name" element={<SingleAuthorPage />} />
         <Route path="/collections/" element={<CollectionsPage />} />
         <Route path="/collections/:title" element={<SingleCollectionPage />} />
         <Route path="/poems" element={<PoemsPage />} />
