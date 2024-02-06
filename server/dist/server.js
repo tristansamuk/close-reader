@@ -30,9 +30,11 @@ app.get("/", (req, res) => {
 const collections_1 = __importDefault(require("./routes/collections"));
 const poets_1 = __importDefault(require("./routes/poets"));
 const poems_1 = __importDefault(require("./routes/poems"));
+const analyses_1 = __importDefault(require("./routes/analyses"));
 app.use("/collections", collections_1.default);
 app.use("/poets", poets_1.default);
 app.use("/poems", poems_1.default);
+app.use("/analyses", analyses_1.default);
 // OpenAI
 app.post("/completions", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     // POST Request Object

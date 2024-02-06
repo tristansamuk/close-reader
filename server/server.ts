@@ -25,10 +25,12 @@ app.get("/", (req: Request, res: Response) => {
 import collectionsRouter from "./routes/collections";
 import poetsRouter from "./routes/poets";
 import poemsRouter from "./routes/poems";
+import analysesRouter from "./routes/analyses";
 
 app.use("/collections", collectionsRouter);
 app.use("/poets", poetsRouter);
 app.use("/poems", poemsRouter);
+app.use("/analyses", analysesRouter);
 
 // OpenAI
 
