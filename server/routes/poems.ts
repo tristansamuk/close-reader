@@ -6,10 +6,20 @@ import db from "../db";
 
 router.get("/all", async (req: Request, res: Response) => {
   try {
-    const data = await db("titles");
+    const data = await db("titles")
+      .join("poets", "poets.id", "titles.poet_id")
+      .select(
+        "titles.id",
+        "titles.title",
+        "titles.short_title",
+        "poets.first_name",
+        "poets.last_name",
+        "titles.pub_year"
+      );
     res.json(data);
-  } catch {
+  } catch (error) {
     res.status(500).send("Error getting poems");
+    console.log(error);
   }
 });
 

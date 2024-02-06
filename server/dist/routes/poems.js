@@ -18,11 +18,14 @@ const db_1 = __importDefault(require("../db"));
 // GET titles of all poems
 router.get("/all", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const data = yield (0, db_1.default)("titles");
+        const data = yield (0, db_1.default)("titles")
+            .join("poets", "poets.id", "titles.poet_id")
+            .select("titles.id", "titles.title", "titles.short_title", "poets.first_name", "poets.last_name", "titles.pub_year");
         res.json(data);
     }
-    catch (_a) {
+    catch (error) {
         res.status(500).send("Error getting poems");
+        console.log(error);
     }
 }));
 // GET all lines of all poems
@@ -31,7 +34,7 @@ router.get("/all/lines", (req, res) => __awaiter(void 0, void 0, void 0, functio
         const data = yield (0, db_1.default)("poems");
         res.status(200).json(data);
     }
-    catch (_b) {
+    catch (_a) {
         res.status(500).send("Error getting poems");
     }
 }));

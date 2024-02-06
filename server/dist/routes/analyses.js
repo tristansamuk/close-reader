@@ -21,7 +21,7 @@ router.get("/:poemTitle", (req, res) => __awaiter(void 0, void 0, void 0, functi
         const poemTitle = req.params.poemTitle;
         const data = yield (0, db_1.default)("analyses")
             .join("titles", "titles.id", "analyses.title_id")
-            .select("analyses.id", "analyses.analysis")
+            .select("analyses.id", "analyses.analysis", "titles.short_title")
             .where("titles.short_title", poemTitle);
         res.status(200).json(data);
     }
