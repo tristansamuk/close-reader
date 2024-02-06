@@ -51,13 +51,15 @@ const PoemsPage = ({ poetryApiUrl }: Props) => {
             <div key={poem.id} className="poems-page__row">
               <Link to={`${baseUrl}/poems/${poem.short_title}`}>
                 <h4 className="poems-page__title">{`${poem.title}`}</h4>
-                <p
-                  key={poem.title}
-                  className="poems-page__name"
-                >{`${poem.first_name} ${poem.last_name}`}</p>
-                <p key={poem.short_title} className="poems-page_year">
-                  {`${poem.pub_year}`}
-                </p>
+                <div className="poems-page__container--name-year">
+                  <p
+                    key={poem.title}
+                    className="poems-page__name"
+                  >{`${poem.first_name} ${poem.last_name}`}</p>
+                  <p key={poem.short_title} className="poems-page__year">
+                    {`${poem.pub_year}`}
+                  </p>
+                </div>
               </Link>
             </div>
           );

@@ -28,6 +28,10 @@
     &--max-width {
       @include container-max-width;
     }
+    &--name-year {
+      display: flex;
+      gap: 0.5rem;
+    }
     &--list {
       padding: 1rem 0;
     }
@@ -50,13 +54,24 @@
     }
   }
   &__title {
+    @include poem-title;
     animation: slideUp 500ms ease-in-out 400ms backwards;
+    margin-bottom: 0.5rem;
   }
   &__name {
+    @include poem-author;
     animation: slideUp 500ms ease-in-out 400ms backwards;
+    width: fit-content;
+  }
+  &__year {
+    @include poem-author;
+    animation: slideUp 500ms ease-in-out 400ms backwards;
+    color: gray;
+    width: fit-content;
   }
   &__loading-container {
     animation: slideUp 500ms ease-in-out 1s backwards;
+    margin: 5rem auto;
     display: flex;
     justify-content: center;
     align-content: center;
