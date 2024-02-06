@@ -3,7 +3,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Header from "./components/Header/Header";
 import HomePage from "./pages/HomePage/HomePage";
 import PoetsPage from "./pages/PoetsPage/PoetsPage";
-import SingleAuthorPage from "./pages/SingleAuthorPage/SingleAuthorPage";
+import SinglePoetPage from "./pages/SingleAuthorPage/SinglePoetPage";
 import CollectionsPage from "./pages/CollectionsPage/CollectionsPage";
 import SingleCollectionPage from "./pages/SingleCollectionPage/SingleCollectionPage";
 import PoemsPage from "./pages/PoemsPage/PoemsPage";
@@ -23,7 +23,7 @@ function App() {
           path="/poets"
           element={<PoetsPage poetryApiUrl={poetryApiUrl} />}
         />
-        <Route path="/poets/:name" element={<SingleAuthorPage />} />
+        <Route path="/poets/:name" element={<SinglePoetPage />} />
         <Route path="/collections/" element={<CollectionsPage />} />
         <Route path="/collections/:title" element={<SingleCollectionPage />} />
         <Route
