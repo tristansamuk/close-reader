@@ -14,11 +14,22 @@
     @include page-heading;
   }
   &__row {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    gap: 1rem;
     border-top: 1px solid lightgrey;
     padding: 1rem 0;
     &:first-of-type {
       border-top: none;
     }
+  }
+  &__poet-pic {
+    height: 3rem;
+    width: 3rem;
+    object-fit: cover;
+    object-position: 0 1%;
+    border-radius: $bdr-radius-lg;
   }
   &__name {
     @include sub-heading;

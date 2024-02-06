@@ -47,6 +47,7 @@ const PoetsPage = ({ poetryApiUrl }: Props) => {
         {poetsList.map((poet) => {
           return (
             <div key={poet.id} className="poets-page__row">
+              <img src={poet.img} alt="" className="poets-page__poet-pic" />
               <h3
                 key={poet.id}
                 className="poets-page__name"
