@@ -28,7 +28,9 @@ function App() {
         />
         <Route
           path="/poets/:name"
-          element={<SinglePoetPage poetryApiUrl={poetryApiUrl} />}
+          element={
+            <SinglePoetPage poetryApiUrl={poetryApiUrl} clientUrl={clientUrl} />
+          }
         />
         <Route path="/collections/" element={<CollectionsPage />} />
         <Route path="/collections/:title" element={<SingleCollectionPage />} />

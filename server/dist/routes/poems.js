@@ -20,7 +20,7 @@ router.get("/all", (req, res) => __awaiter(void 0, void 0, void 0, function* () 
     try {
         const data = yield (0, db_1.default)("titles")
             .join("poets", "poets.id", "titles.poet_id")
-            .select("titles.id", "titles.title", "titles.short_title", "poets.first_name", "poets.last_name", "titles.pub_year")
+            .select("titles.id", "titles.title", "titles.short_title", "titles.pub_year", "poets.first_name", "poets.last_name", "pub_year")
             .orderBy("titles.title");
         res.json(data);
     }
@@ -45,7 +45,7 @@ router.get("/:authorName", (req, res) => __awaiter(void 0, void 0, void 0, funct
         const authorName = req.params.authorName;
         const data = yield (0, db_1.default)("titles")
             .join("poets", "poets.id", "titles.poet_id")
-            .select("titles.id", "poets.first_name", "poets.last_name", "titles.title")
+            .select("poets.first_name", "poets.last_name", "titles.id", "titles.pub_year", "titles.short_title", "titles.title")
             .where("poets.url_param", authorName);
         res.status(200).json(data);
     }

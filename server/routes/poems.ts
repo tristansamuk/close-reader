@@ -12,9 +12,10 @@ router.get("/all", async (req: Request, res: Response) => {
         "titles.id",
         "titles.title",
         "titles.short_title",
+        "titles.pub_year",
         "poets.first_name",
         "poets.last_name",
-        "titles.pub_year"
+        "pub_year"
       )
       .orderBy("titles.title");
     res.json(data);
@@ -43,9 +44,11 @@ router.get("/:authorName", async (req: Request, res: Response) => {
     const data = await db("titles")
       .join("poets", "poets.id", "titles.poet_id")
       .select(
-        "titles.id",
         "poets.first_name",
         "poets.last_name",
+        "titles.id",
+        "titles.pub_year",
+        "titles.short_title",
         "titles.title"
       )
       .where("poets.url_param", authorName);
