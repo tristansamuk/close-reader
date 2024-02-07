@@ -35,14 +35,19 @@ const Analysis = ({ title, poetryApiUrl }: Props) => {
     return (
       <div className="analysis__loading-container">
         <div className="analysis__loading-icon">
-          <RobotIcon fill={"#000000"} height={"32"} width={"32"} />
+          <RobotIcon fill={"#808080"} height={"32"} width={"32"} />
         </div>
         <h3 className="analysis__loading-text">Close reading...</h3>
       </div>
     );
   }
 
-  return <p className="analysis__text">{`${text}`}</p>;
+  return (
+    <div className="analysis__container">
+      <h3 className="analysis__heading">Analysis</h3>
+      <p className="analysis__text">{`${text}`}</p>
+    </div>
+  );
 };
 
 export default Analysis;

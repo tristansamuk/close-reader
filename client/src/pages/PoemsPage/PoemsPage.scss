@@ -52,6 +52,9 @@
     &:first-of-type {
       border-top: none;
     }
+    @include tablet {
+      width: 40%;
+    }
   }
   &__title {
     @include poem-title;

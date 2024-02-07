@@ -44,9 +44,20 @@
     height: 100vh;
   }
   &__loading-text {
+    @include sub-heading;
     animation: slideUp 500ms ease-in-out 500ms backwards;
     font-family: $sans-serif;
+    color: #808080;
+    font-size: 14px;
     margin: 0 1rem;
     line-height: 1.5rem;
+  }
+  &__heading {
+    color: $txt-secondary;
+  }
+  &__text {
+    animation: slideUp 500ms ease-in-out 500ms backwards;
+    color: gray;
+    font-size: 14px;
   }
 }

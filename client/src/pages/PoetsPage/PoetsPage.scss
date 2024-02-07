@@ -30,6 +30,9 @@
     }
     &--list {
       padding: 1rem 0;
+      @include tablet {
+        width: 40%;
+      }
     }
   }
   &__heading {
