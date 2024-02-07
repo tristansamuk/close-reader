@@ -15,15 +15,30 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const router = express_1.default.Router();
 const db_1 = __importDefault(require("../db"));
+// Get list of poets
 router.get("/", (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         const data = yield (0, db_1.default)("poets")
-            .select("poets.id", "poets.first_name", "poets.last_name", "poets.birth_year", "poets.death_year", "poets.img")
+            .select("poets.id", "poets.first_name", "poets.last_name", "poets.img", "poets.url_param")
             .orderBy("last_name");
         res.status(200).json(data);
     }
     catch (_a) {
         res.status(500).send("Error getting poets");
+    }
+}));
+// Get single poet information
+router.get("/:name", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const poetName = req.params.name;
+        const data = yield (0, db_1.default)("poets")
+            .select("*")
+            .where("poets.url_param", poetName);
+        res.status(200).json(data);
+    }
+    catch (error) {
+        res.status(500).send("Error getting poet information");
+        console.log(error);
     }
 }));
 exports.default = router;

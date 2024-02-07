@@ -9,6 +9,10 @@
 a {
   text-decoration: none;
   color: $txt-primary;
+  display: inherit;
+  align-items: inherit;
+  justify-content: inherit;
+  gap: inherit;
 }
 
 body {

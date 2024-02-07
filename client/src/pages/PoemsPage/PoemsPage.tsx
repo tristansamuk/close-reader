@@ -22,6 +22,8 @@ interface Poem {
 const PoemsPage = ({ poetryApiUrl, clientUrl }: Props) => {
   const [poemsList, setPoemsList] = useState<Poem[] | null>(null);
 
+  // On render, get a list of all the poems in the database and store in state
+
   useEffect(() => {
     const fetchPoems = async () => {
       try {
@@ -32,7 +34,7 @@ const PoemsPage = ({ poetryApiUrl, clientUrl }: Props) => {
       }
     };
     fetchPoems();
-  });
+  }, []);
 
   if (!poemsList) {
     return (
@@ -45,6 +47,7 @@ const PoemsPage = ({ poetryApiUrl, clientUrl }: Props) => {
     <div className="poems-page__container--max-width">
       <h2 className="poems-page__heading">Poems</h2>
       <div className="poems-page__container--list">
+        {/* Renders the list of poems */}
         {poemsList.map((poem: Poem) => {
           return (
             <div key={poem.id} className="poems-page__row">

@@ -1,11 +1,13 @@
 import "./PoetsPage.scss";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 // Types
 
 interface Props {
   poetryApiUrl: string;
+  clientUrl: string;
 }
 
 interface Poet {
@@ -15,9 +17,10 @@ interface Poet {
   birth_year: number;
   death_year: number;
   img: string;
+  url_param: string;
 }
 
-const PoetsPage = ({ poetryApiUrl }: Props) => {
+const PoetsPage = ({ poetryApiUrl, clientUrl }: Props) => {
   const [poetsList, setPoetsList] = useState<Poet[] | null>(null);
 
   useEffect(() => {
@@ -47,11 +50,13 @@ const PoetsPage = ({ poetryApiUrl }: Props) => {
         {poetsList.map((poet) => {
           return (
             <div key={poet.id} className="poets-page__row">
-              <img src={poet.img} alt="" className="poets-page__poet-pic" />
-              <h4
-                key={poet.id}
-                className="poets-page__name"
-              >{`${poet.first_name} ${poet.last_name}`}</h4>
+              <Link to={`${clientUrl}/poets/${poet.url_param}`}>
+                <img src={poet.img} alt="" className="poets-page__poet-pic" />
+                <h4
+                  key={poet.id}
+                  className="poets-page__name"
+                >{`${poet.first_name} ${poet.last_name}`}</h4>
+              </Link>
             </div>
           );
         })}

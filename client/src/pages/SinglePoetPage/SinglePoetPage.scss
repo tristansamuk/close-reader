@@ -28,5 +28,11 @@
     &--max-width {
       @include container-max-width;
     }
+    &--loading {
+      animation: slideUp 1.5s ease-in-out 2s backwards infinite;
+      display: flex;
+      justify-content: center;
+      align-content: center;
+    }
   }
 }
