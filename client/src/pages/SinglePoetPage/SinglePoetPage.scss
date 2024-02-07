@@ -34,5 +34,37 @@
       justify-content: center;
       align-content: center;
     }
+    &--profile {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    &--name-years {
+      margin-top: 1rem;
+      display: flex;
+      flex-direction: column;
+    }
+  }
+  &__img {
+    width: 100%;
+    height: 25rem;
+    object-fit: cover;
+    border-radius: 10px;
+  }
+  &__years {
+    @include body-copy;
+  }
+  &__bio {
+    @include body-copy;
+    white-space: pre-wrap;
+    color: gray;
+    font-size: 14px;
+    line-height: 1.5rem;
+  }
+  &__source {
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    font-weight: 400;
+    color: gray;
   }
 }

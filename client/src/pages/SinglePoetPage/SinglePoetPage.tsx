@@ -5,7 +5,7 @@ import axios from "axios";
 
 // Types
 interface Props {
-  clientUrl: string;
+  poetryApiUrl: string;
 }
 
 interface Poet {
@@ -22,15 +22,16 @@ interface Poet {
   created_at: string;
 }
 
-const SinglePoetPage = ({ clientUrl }: Props) => {
-  const { poetName } = useParams();
+const SinglePoetPage = ({ poetryApiUrl }: Props) => {
+  const { name } = useParams();
   const [poet, setPoet] = useState<Poet | null>(null);
+  console.log(name);
 
   useEffect(() => {
     const fetchPoet = async () => {
       try {
-        const response = await axios.get(`${clientUrl}/poets/${poetName}`);
-        setPoet(response.data);
+        const response = await axios.get(`${poetryApiUrl}/poets/${name}`);
+        setPoet(response.data[0]);
       } catch (error) {
         console.log("Error fetching poet: ", error);
       }
@@ -43,17 +44,27 @@ const SinglePoetPage = ({ clientUrl }: Props) => {
   }
 
   return (
-    <div className="poet-page__container--max-width">
-      <div key={poet.id} className="poet-page__container--profile">
-        <img src={`${poet.img}`} alt="" className="poet-page__img" />
-        <h4 className="poet-page__name">{`${poet.first_name} ${poet.last_name}`}</h4>
-        <p className="poet-page__birth-year">`${poet.birth_year}`</p>
-        <p className="poet-page__birth-year">`${poet.death_year}`</p>
-        <p className="poet-page__bio">`${poet.bio}`</p>
-      </div>
+    <>
+      <div className="poet-page__container--max-width">
+        <div key={poet.id} className="poet-page__container--profile">
+          <img
+            src={`${poet.img}`}
+            alt={`${poet.first_name} ${poet.last_name}`}
+            className="poet-page__img"
+          />
+          <div className="poet-page__container--name-years">
+            <h4 className="poet-page__name">{`${poet.first_name} ${poet.last_name}`}</h4>
+            <p className="poet-page__years">{`${poet.birth_year} - ${poet.death_year}`}</p>
+          </div>
+          <p className="poet-page__bio">{poet.bio}</p>
+          <a href={`${poet.bio_source}`}>
+            <p className="poet-page__source">Source: Wikipedia</p>
+          </a>
+        </div>
 
-      <div className="poet-page__container--list">{/* Rows here */}</div>
-    </div>
+        <div className="poet-page__container--list">{/* Rows here */}</div>
+      </div>
+    </>
   );
 };
 
