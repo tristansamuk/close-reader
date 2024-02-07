@@ -107,6 +107,7 @@
     @include tablet {
       font-size: 1.25rem;
       line-height: 2.25rem;
+      max-width: 30rem;
     }
     @include desktop {
       text-align: left;
