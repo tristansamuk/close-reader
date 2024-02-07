@@ -105,31 +105,24 @@ const SinglePoemPage = ({ poetryApiUrl, clientUrl }: Props) => {
   return (
     <>
       <div className="poem__max-width-container">
-        <div className="poem__heading-button-container">
-          <div className="poem__title-author-container">
-            <h2 className="poem__title appear-1">{poemInfo.title}</h2>
+        <div className="poem__poem-container">
+          <div className="poem__heading-button-container">
+            <div className="poem__title-author-container">
+              <h2 className="poem__title appear-1">{poemInfo.title}</h2>
 
-            <Link to={`${clientUrl}/poets/${poemInfo.url_param}`}>
-              <h3 className="poem__author appear-2">{`${poemInfo.first_name} ${poemInfo.last_name}`}</h3>
-            </Link>
+              <Link to={`${clientUrl}/poets/${poemInfo.url_param}`}>
+                <h3 className="poem__author appear-2">{`${poemInfo.first_name} ${poemInfo.last_name}`}</h3>
+              </Link>
+            </div>
           </div>
-          {isButtonVisible && (
-            <button
-              onClick={onClickButton}
-              className="poem__analysis-button--desktop"
-            >
-              <RobotIcon fill={"#FFFFFF"} height={"24"} width={"24"} />
-            </button>
-          )}
+          <div className="poem__lines-container appear-3">
+            {poem.map((line, index) => (
+              <p className="poem__line" key={index}>
+                {line}
+              </p>
+            ))}
+          </div>
         </div>
-        <div className="poem__lines-container appear-3">
-          {poem.map((line, index) => (
-            <p className="poem__line" key={index}>
-              {line}
-            </p>
-          ))}
-        </div>
-
         {/* When state of `isOpen` is `true`, open the analysis window */}
 
         {isOpen && (

@@ -26,7 +26,7 @@ const Analysis = ({ title, poetryApiUrl }: Props) => {
     setTimeout(() => {
       // Simulates loading a response directly from Chat-GPT. Will connect directly on next sprint, but was a bit unpredictable to rely on for live demo.
       fetchAnalysis();
-    }, 5000);
+    }, 2250);
   }, []);
 
   // Loading state
@@ -37,7 +37,7 @@ const Analysis = ({ title, poetryApiUrl }: Props) => {
         <div className="analysis__loading-icon">
           <RobotIcon fill={"#000000"} height={"32"} width={"32"} />
         </div>
-        <h3 className="analysis__loading-text">Analyzing...</h3>
+        <h3 className="analysis__loading-text">Close reading...</h3>
       </div>
     );
   }

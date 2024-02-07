@@ -72,6 +72,8 @@
       margin: auto;
     }
     @include desktop {
+      display: flex;
+      justify-content: space-between;
       max-width: 1300px;
       margin: auto;
     }
@@ -132,25 +134,7 @@
       left: 90%;
     }
     @include desktop {
-      display: none;
-    }
-    &--desktop {
-      display: none;
-      @include desktop {
-        height: 3rem;
-        width: 3rem;
-        animation: buttonAppear 500ms ease-in-out 500ms backwards;
-        background-color: $btn-dark;
-        border: none;
-        border-radius: 25px;
-        display: inline-block;
-        margin-top: 0.5rem;
-        opacity: 0.7;
-        transition: scale 200ms ease-in-out;
-        &:hover {
-          scale: 1.2;
-        }
-      }
+      // display: none;
     }
   }
 }
@@ -158,7 +142,7 @@
 .analysis {
   &__window {
     animation: windowOpen 500ms ease-in-out backwards;
-    background-color: $bg-secondary;
+    background-color: white;
     border: none;
     width: 100%;
     height: 100vh;
@@ -184,8 +168,9 @@
       left: 42rem;
       overflow: auto;
       padding: 1.5rem 1rem;
-      border: 1px solid lightgrey;
-      border-radius: $bdr-radius-sm;
+      border: solid 1px lightgray;
+      border-radius: 10px;
+      position: inherit;
     }
   }
   &__text {
@@ -194,12 +179,16 @@
     padding: 0.5rem 0;
     font-size: 1rem;
     line-height: 1.5rem;
+    white-space: pre-wrap;
   }
   &__close-icon {
     background-color: transparent;
     border: none;
     height: 48px;
     width: 48px;
+    @include desktop {
+      display: none;
+    }
   }
   &__overlay {
     animation: overlayOpen 500ms ease-in-out 500ms backwards;
