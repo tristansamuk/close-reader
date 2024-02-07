@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import axios from "axios";
 import "./SinglePoemPage.scss";
@@ -10,15 +10,17 @@ import Analysis from "../../components/Analysis/Analysis";
 
 type Props = {
   poetryApiUrl: string;
+  clientUrl: string;
 };
 interface PoemInfo {
   first_name: string;
   last_name: string;
   title: string;
   pub_year: number;
+  url_param: string;
 }
 
-const SinglePoemPage = ({ poetryApiUrl }: Props) => {
+const SinglePoemPage = ({ poetryApiUrl, clientUrl }: Props) => {
   const { title } = useParams();
 
   // Initial state for page elements
@@ -105,8 +107,11 @@ const SinglePoemPage = ({ poetryApiUrl }: Props) => {
       <div className="poem__max-width-container">
         <div className="poem__heading-button-container">
           <div className="poem__title-author-container">
-            <h2 className="poem__title appear-1">{poemInfo?.title}</h2>
-            <h3 className="poem__author appear-2">{`${poemInfo.first_name} ${poemInfo.last_name}`}</h3>
+            <h2 className="poem__title appear-1">{poemInfo.title}</h2>
+
+            <Link to={`${clientUrl}/poets/${poemInfo.url_param}`}>
+              <h3 className="poem__author appear-2">{`${poemInfo.first_name} ${poemInfo.last_name}`}</h3>
+            </Link>
           </div>
           {isButtonVisible && (
             <button

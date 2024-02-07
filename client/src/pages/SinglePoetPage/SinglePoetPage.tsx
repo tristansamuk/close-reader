@@ -1,6 +1,6 @@
 import "./SinglePoetPage.scss";
 import { useState, useEffect } from "react";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 
 // Types
@@ -22,10 +22,18 @@ interface Poet {
   created_at: string;
 }
 
+interface Poems {
+  id: number;
+  first_name: string;
+  last_name: string;
+  title: "Sonnet 1: From fairest creatures we desire increase";
+}
+
 const SinglePoetPage = ({ poetryApiUrl }: Props) => {
   const { name } = useParams();
   const [poet, setPoet] = useState<Poet | null>(null);
-  console.log(name);
+
+  // Gets the information about a single poet and stores in state
 
   useEffect(() => {
     const fetchPoet = async () => {
@@ -39,8 +47,10 @@ const SinglePoetPage = ({ poetryApiUrl }: Props) => {
     fetchPoet();
   }, []);
 
+  // Error
+
   if (!poet) {
-    return <div className="poet-page__container--loading">loading...</div>;
+    return <div className="poet-page__container--loading">Loading...</div>;
   }
 
   return (
@@ -52,10 +62,10 @@ const SinglePoetPage = ({ poetryApiUrl }: Props) => {
             alt={`${poet.first_name} ${poet.last_name}`}
             className="poet-page__img"
           />
-          <div className="poet-page__container--name-years">
-            <h4 className="poet-page__name">{`${poet.first_name} ${poet.last_name}`}</h4>
-            <p className="poet-page__years">{`${poet.birth_year} - ${poet.death_year}`}</p>
-          </div>
+          {/* <div className="poet-page__container--name-years"> */}
+          <h4 className="poet-page__name">{`${poet.first_name} ${poet.last_name}`}</h4>
+          {/* <p className="poet-page__years">{`${poet.birth_year} - ${poet.death_year}`}</p> */}
+          {/* </div> */}
           <p className="poet-page__bio">{poet.bio}</p>
           <a href={`${poet.bio_source}`}>
             <p className="poet-page__source">Source: Wikipedia</p>

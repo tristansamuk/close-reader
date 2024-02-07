@@ -46,7 +46,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
-    gap: 1rem;
+    gap: 0.5rem;
     border-top: 1px solid lightgrey;
     padding: 1rem 0;
     &:first-of-type {
@@ -56,7 +56,6 @@
   &__title {
     @include poem-title;
     animation: slideUp 500ms ease-in-out 400ms backwards;
-    margin-bottom: 0.5rem;
   }
   &__name {
     @include poem-author;

@@ -40,7 +40,9 @@ function App() {
         />
         <Route
           path="/poems/:title"
-          element={<SinglePoemPage poetryApiUrl={poetryApiUrl} />}
+          element={
+            <SinglePoemPage poetryApiUrl={poetryApiUrl} clientUrl={clientUrl} />
+          }
         />
         <Route path="/search" element={<SearchPage />} />
         {/* Search Results page needed? */}

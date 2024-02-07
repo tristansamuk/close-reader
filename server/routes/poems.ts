@@ -83,6 +83,7 @@ router.get("/info/:poemTitle", async (req: Request, res: Response) => {
       .select(
         "poets.first_name",
         "poets.last_name",
+        "poets.url_param",
         "titles.title",
         "titles.pub_year"
       )
