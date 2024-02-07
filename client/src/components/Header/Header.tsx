@@ -36,10 +36,10 @@ const Header: React.FC = () => {
               <Link to={"/"}>Home</Link>
             </li>
             <li className="header__nav-item--desk">
-              <Link to={"poets"}>Poets</Link>
+              <Link to={"/poets"}>Poets</Link>
             </li>
             <li className="header__nav-item--desk">
-              <Link to={"poems"}>Poems</Link>
+              <Link to={"/poems"}>Poems</Link>
             </li>
             <li className="header__nav-item--desk">
               <Link to={"collections"}>Collections</Link>

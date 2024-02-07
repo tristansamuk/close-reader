@@ -47,15 +47,23 @@
       @include tablet {
         width: 50%;
       }
+      @include desktop {
+        width: 40%;
+      }
     }
     &--poem-list {
-      width: 50%;
+      @include tablet {
+        width: 50%;
+      }
+      @include desktop {
+        width: 60%;
+      }
     }
   }
   &__img {
     animation: slideUp 500ms ease-in-out 150ms backwards;
     width: 100%;
-    height: 25rem;
+    height: 50%;
     object-fit: cover;
     border-radius: 10px;
   }
@@ -80,6 +88,7 @@
   }
   &__heading {
     @include page-heading;
+    animation: slideUp 500ms ease-in-out 200ms backwards;
   }
   &__row {
     animation: slideUp 500ms ease-in-out 200ms backwards;
