@@ -81,6 +81,7 @@
     line-height: 1.5rem;
   }
   &__source {
+    animation: slideUp 500ms ease-in-out 350ms backwards;
     font-size: 0.75rem;
     text-transform: uppercase;
     font-weight: 400;

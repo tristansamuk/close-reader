@@ -39,19 +39,16 @@
   align-items: center;
   padding: 1rem 1rem;
   @include tablet {
-    padding: 2rem 2rem;
+    padding: 2rem 0rem;
   }
   @include desktop {
     padding: 2rem 1.5rem;
   }
   &__max-width-container {
+    @include container-max-width;
+    padding: 0rem 0rem;
     @include tablet {
-      max-width: 95%;
-      margin: auto;
-      @include desktop {
-        max-width: 1300px;
-        margin: auto;
-      }
+      padding: 0rem 0rem;
     }
   }
   &__container-left {
@@ -127,10 +124,10 @@
     width: 100vw;
     opacity: 0.5;
     position: absolute;
-    top: 19rem;
+    top: 16.57rem;
     z-index: 1;
     @include tablet {
-      top: 20.25rem;
+      top: 18.5rem;
       right: 0rem;
     }
     @include desktop {

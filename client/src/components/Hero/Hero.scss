@@ -89,7 +89,7 @@
   &__heading {
     @include hero-heading;
     text-align: center;
-    max-width: 21rem;
+    max-width: 30rem;
     @include tablet {
       max-width: 37rem;
     }
@@ -119,11 +119,11 @@
   }
   &__image {
     aspect-ratio: auto;
-    width: 100%;
+    width: 75%;
     @include tablet {
     }
     @include desktop {
-      max-width: 70%;
+      max-width: 67%;
     }
   }
 }

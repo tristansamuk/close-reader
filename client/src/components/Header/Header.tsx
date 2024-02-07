@@ -41,9 +41,9 @@ const Header: React.FC = () => {
             <li className="header__nav-item--desk">
               <Link to={"/poems"}>Poems</Link>
             </li>
-            <li className="header__nav-item--desk">
+            {/* <li className="header__nav-item--desk">
               <Link to={"collections"}>Collections</Link>
-            </li>
+            </li> */}
           </ul>
           <Link onClick={handleClickMenu} to={"search"}>
             <img
@@ -74,11 +74,11 @@ const Header: React.FC = () => {
                   Poems
                 </Link>
               </li>
-              <li className="header__nav-item--4">
+              {/* <li className="header__nav-item--4">
                 <Link onClick={handleClickMenu} to={"collections"}>
                   Collections
                 </Link>
-              </li>
+              </li> */}
             </ul>
           </div>
           <a onClick={handleClickOverlay} href="">

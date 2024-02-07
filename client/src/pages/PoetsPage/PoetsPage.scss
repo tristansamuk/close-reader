@@ -31,7 +31,10 @@
     &--list {
       padding: 1rem 0;
       @include tablet {
-        width: 40%;
+        width: 60%;
+      }
+      @include desktop {
+        width: 50%;
       }
     }
   }
