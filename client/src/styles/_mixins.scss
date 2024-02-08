@@ -33,6 +33,7 @@
 // Text Styles
 
 @mixin logo {
+  font-family: $serif;
   font-weight: $normal;
   letter-spacing: -1.5px;
   word-spacing: -3px;

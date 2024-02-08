@@ -9,6 +9,7 @@ import SingleCollectionPage from "./pages/SingleCollectionPage/SingleCollectionP
 import PoemsPage from "./pages/PoemsPage/PoemsPage";
 import SinglePoemPage from "./pages/SinglePoemPage/SinglePoemPage";
 import SearchPage from "./pages/SearchPage/SearchPage";
+import Footer from "./components/Footer/Footer";
 
 function App() {
   // Change to process.env
@@ -49,6 +50,7 @@ function App() {
         <Route path="/search" element={<SearchPage />} />
         {/* Search Results page needed? */}
       </Routes>
+      <Footer />
     </BrowserRouter>
   );
 }
