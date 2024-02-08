@@ -67,7 +67,7 @@
     padding: 1.5rem 1.5rem;
     height: 100vh;
     @include tablet {
-      padding: 1.5rem 2rem;
+      padding: 1.5rem 1rem;
       max-width: 95%;
       margin: auto;
     }
@@ -76,6 +76,14 @@
       justify-content: space-between;
       max-width: 1300px;
       margin: auto;
+    }
+  }
+  &__poem-container {
+    @include tablet {
+      width: 70%;
+    }
+    @include desktop {
+      width: 50%;
     }
   }
   &__heading-button-container {
