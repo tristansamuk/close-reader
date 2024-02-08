@@ -1,10 +1,14 @@
 import "./Hero.scss";
 import readingHands from "../../assets/images/reading-hands.png";
+import { useNavigate } from "react-router-dom";
 
-const Hero: React.FC = () => {
+const Hero = () => {
+  const navigate = useNavigate();
   // Click Handler
 
-  const handleClickButton = (): void => {};
+  const handleClickButton = () => {
+    navigate("/poems");
+  };
 
   return (
     <div className="hero">
