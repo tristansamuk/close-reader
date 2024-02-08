@@ -18,9 +18,7 @@ const db_1 = __importDefault(require("../db"));
 // Get list of poets
 router.get("/", (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
-        const data = yield (0, db_1.default)("poets")
-            .select("poets.id", "poets.first_name", "poets.last_name", "poets.img", "poets.url_param")
-            .orderBy("last_name");
+        const data = yield (0, db_1.default)("poets").select("*").orderBy("last_name");
         res.status(200).json(data);
     }
     catch (_a) {
