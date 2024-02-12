@@ -14,7 +14,7 @@ const { PORT, CORS_ORIGIN, API_KEY } = process.env;
 app.use((0, cors_1.default)({ origin: CORS_ORIGIN }));
 app.use(express_1.default.json());
 // Home Route
-app.get("/", (req, res) => {
+app.get("/", (_req, res) => {
     res.send("Hello World!");
 });
 // Routes

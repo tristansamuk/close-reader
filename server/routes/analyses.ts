@@ -26,6 +26,7 @@ export default router;
 const openai = new OpenAI();
 
 const title = "The Canonization";
+const titleID = 3;
 const poet = "John Donne";
 
 router.post("/", async (_req: Request, res: Response) => {
@@ -48,7 +49,11 @@ router.post("/", async (_req: Request, res: Response) => {
         max_tokens: 250,
       });
       const poemAnalysis = completion.choices[0].message.content;
-      res.status(200).send(poemAnalysis);
+      await db("analyses").insert({
+        title_id: `${titleID}`,
+        analysis: `${poemAnalysis}`,
+      });
+      res.status(201).send(poemAnalysis);
     };
     sendToGPT();
   } catch (error) {

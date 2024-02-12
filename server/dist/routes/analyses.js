@@ -35,6 +35,7 @@ exports.default = router;
 // POST analysis request to chat gpt
 const openai = new openai_1.default();
 const title = "The Canonization";
+const titleID = 3;
 const poet = "John Donne";
 router.post("/", (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
@@ -55,7 +56,11 @@ router.post("/", (_req, res) => __awaiter(void 0, void 0, void 0, function* () {
                 max_tokens: 250,
             });
             const poemAnalysis = completion.choices[0].message.content;
-            res.status(200).send(poemAnalysis);
+            yield (0, db_1.default)("analyses").insert({
+                title_id: `${titleID}`,
+                analysis: `${poemAnalysis}`,
+            });
+            res.status(201).send(poemAnalysis);
         });
         sendToGPT();
     }

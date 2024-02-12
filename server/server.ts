@@ -16,7 +16,7 @@ app.use(express.json());
 
 // Home Route
 
-app.get("/", (req: Request, res: Response) => {
+app.get("/", (_req: Request, res: Response) => {
   res.send("Hello World!");
 });
 
