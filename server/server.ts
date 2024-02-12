@@ -34,35 +34,18 @@ app.use("/analyses", analysesRouter);
 
 // OpenAI
 
-app.post("/completions", async (req, res): Promise<void> => {
-  // POST Request Object
+const openai = new OpenAI();
 
-  const options = {
-    method: "POST",
-    headers: {
-      Authorization: `Bearer ${API_KEY}`,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      model: "gpt-3.5-turbo",
-      messages: [{ role: "user", content: "What is poetry?" }],
-      max_tokens: 250,
-    }),
-  };
+const main = async () => {
+  const completion = await openai.chat.completions.create({
+    messages: [{ role: "system", content: "You are a helpful assistant." }],
+    model: "gpt-3.5-turbo",
+  });
 
-  // Fetch Request
+  console.log(completion.choices[0]);
+};
 
-  try {
-    const response = await fetch(
-      "https://api.openai.com//v1/chat/completions",
-      options
-    );
-    const data = await response.json();
-    res.send(data);
-  } catch (error) {
-    console.error(error);
-  }
-});
+main();
 
 // Port
 app.listen(PORT, () => {
