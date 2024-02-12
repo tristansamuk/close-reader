@@ -1,8 +1,9 @@
 import express, { Request, Response } from "express";
+import OpenAI from "openai";
 const router = express.Router();
 import db from "../db";
 
-// GET analysis of a poem
+// GET analysis of a poem from database
 
 router.get("/:poemTitle", async (req: Request, res: Response) => {
   try {
@@ -20,14 +21,48 @@ router.get("/:poemTitle", async (req: Request, res: Response) => {
 
 export default router;
 
-// POST analysis
+// POST analysis request to chat gpt
 
-router.post("/", async (req: Request, res: Response) => {
+const openai = new OpenAI();
+
+const title = "The Canonization";
+const poet = "John Donne";
+
+router.post("/", async (_req: Request, res: Response) => {
   try {
-    const newAnalysis = await db("analyses").insert(req.body);
-    res.status(201).json(req.body);
+    const sendToGPT = async () => {
+      const completion = await openai.chat.completions.create({
+        model: "gpt-3.5-turbo",
+        messages: [
+          {
+            role: "system",
+            content:
+              "You are poetry expert. When you receive a poem title, please generate a short interpretive analysis that will help a reader understand what the poem is about, any interesting things to pay attention to, and situate the poem in its historical or biographical context.",
+          },
+          {
+            role: "user",
+            content: `${title} by ${poet}`,
+          },
+        ],
+        temperature: 0.7,
+        max_tokens: 250,
+      });
+      const poemAnalysis = completion.choices[0].message.content;
+      res.status(200).send(poemAnalysis);
+    };
+    sendToGPT();
   } catch (error) {
-    res.status(500).send("Error adding analysis");
+    res.status(500).send("Error getting analysis");
     console.log(error);
   }
 });
+
+// router.post("/", async (req: Request, res: Response) => {
+//   try {
+//     const newAnalysis = await db("analyses").insert(req.body);
+//     res.status(201).json(req.body);
+//   } catch (error) {
+//     res.status(500).send("Error adding analysis");
+//     console.log(error);
+//   }
+// });

@@ -32,21 +32,6 @@ app.use("/poets", poetsRouter);
 app.use("/poems", poemsRouter);
 app.use("/analyses", analysesRouter);
 
-// OpenAI
-
-const openai = new OpenAI();
-
-const main = async () => {
-  const completion = await openai.chat.completions.create({
-    messages: [{ role: "system", content: "You are a helpful assistant." }],
-    model: "gpt-3.5-turbo",
-  });
-
-  console.log(completion.choices[0]);
-};
-
-main();
-
 // Port
 app.listen(PORT, () => {
   console.log(`Server listening on port ${PORT}`);
