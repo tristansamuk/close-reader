@@ -3,6 +3,16 @@ import OpenAI from "openai";
 const router = express.Router();
 import db from "../db";
 
+// Types
+
+interface analysisData {
+  id: number;
+  analysis: string | undefined;
+  short_title: string;
+  title_id: number;
+  title: string;
+}
+
 // GET analysis of a poem from database
 
 router.get("/:poemTitle", async (req: Request, res: Response) => {
@@ -26,48 +36,73 @@ export default router;
 const openai = new OpenAI();
 
 const title = "The Canonization";
-const titleID = 3;
 const poet = "John Donne";
 
-router.post("/", async (_req: Request, res: Response) => {
+router.post("/:poemTitle", async (req: Request, res: Response) => {
+  // Takes url param and checks database for existing analysis
   try {
-    const sendToGPT = async () => {
-      const completion = await openai.chat.completions.create({
-        model: "gpt-3.5-turbo",
-        messages: [
-          {
-            role: "system",
-            content:
-              "You are poetry expert. When you receive a poem title, please generate a short interpretive analysis that will help a reader understand what the poem is about, any interesting things to pay attention to, and situate the poem in its historical or biographical context.",
-          },
-          {
-            role: "user",
-            content: `${title} by ${poet}`,
-          },
-        ],
-        temperature: 0.7,
-        max_tokens: 250,
-      });
-      const poemAnalysis = completion.choices[0].message.content;
-      await db("analyses").insert({
-        title_id: `${titleID}`,
-        analysis: `${poemAnalysis}`,
-      });
-      res.status(201).send(poemAnalysis);
-    };
-    sendToGPT();
+    const poemTitle = req.params.poemTitle;
+    const data: analysisData[] = await db("analyses")
+      .join("titles", "titles.id", "analyses.title_id")
+      .select(
+        "analyses.id",
+        "analyses.title_id",
+        "titles.title",
+        "analyses.analysis",
+        "titles.short_title"
+      )
+      .where("titles.short_title", poemTitle);
+    // If analysis is falsey, makes request to ChatGPT for new analysis
+
+    // Type error here, undefined?
+
+    if (!data[0].analysis) {
+      try {
+        // Function that makes the post request to ChatGPT and posts result in the database
+
+        const sendToGPT = async () => {
+          const completion = await openai.chat.completions.create({
+            model: "gpt-3.5-turbo",
+            messages: [
+              {
+                role: "system",
+                content:
+                  "You are poetry expert. When you receive a poem title, please generate a short interpretive analysis that will help a reader understand what the poem is about, any interesting things to pay attention to, and situate the poem in its historical or biographical context.",
+              },
+              {
+                role: "user",
+                content: `${title} by ${poet}`,
+              },
+            ],
+            temperature: 0.7,
+            max_tokens: 100,
+          });
+          const poemAnalysis = completion.choices[0].message.content;
+
+          // Posts the resulting analysis to the database
+
+          await db("analyses").insert({
+            title_id: `${data[0].title_id}`,
+            analysis: `${poemAnalysis}`,
+          });
+          res.status(201).send(poemAnalysis);
+        };
+
+        // Calling the function
+
+        sendToGPT();
+      } catch (error) {
+        res.status(500).send("Error getting analysis");
+        console.log(error);
+      }
+    }
+
+    // What happens if "analysis" is truthy
+
+    res.json(data);
+    console.log(data[0].analysis);
   } catch (error) {
-    res.status(500).send("Error getting analysis");
+    res.status(500).send("Error checking database for analysis");
     console.log(error);
   }
 });
-
-// router.post("/", async (req: Request, res: Response) => {
-//   try {
-//     const newAnalysis = await db("analyses").insert(req.body);
-//     res.status(201).json(req.body);
-//   } catch (error) {
-//     res.status(500).send("Error adding analysis");
-//     console.log(error);
-//   }
-// });
