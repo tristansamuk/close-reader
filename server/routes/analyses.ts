@@ -3,6 +3,8 @@ import OpenAI from "openai";
 const router = express.Router();
 import db from "../db";
 
+const openai = new OpenAI();
+
 // Types
 
 interface analysisData {
@@ -13,9 +15,12 @@ interface analysisData {
   title: string;
 }
 
-const openai = new OpenAI();
-const poet = "John Donne";
-const titleId = 10;
+interface poetTitleData {
+  first_name: string;
+  last_name: string;
+  title: string;
+  id: number;
+}
 
 // Middleware
 
@@ -33,8 +38,21 @@ const checkForAnalysis = async (
       .where("titles.short_title", poemTitle);
 
     // If no analysis in database, request new analysis from GPT
+
     if (!data[0]) {
-      console.log("If statement at line 39 ran");
+      const poetTitle: poetTitleData[] = await db("titles")
+        .join("poets", "poets.id", "titles.poet_id")
+        .select(
+          "poets.first_name",
+          "poets.last_name",
+          "titles.title",
+          "titles.id"
+        )
+        .where("titles.short_title", poemTitle);
+      const poetName = `${poetTitle[0].first_name} ${poetTitle[0].last_name}`;
+      const titleOfPoem = poetTitle[0].title;
+      const titleId = poetTitle[0].id;
+
       const sendToGPT = async () => {
         const completion = await openai.chat.completions.create({
           model: "gpt-3.5-turbo",
@@ -46,13 +64,19 @@ const checkForAnalysis = async (
             },
             {
               role: "user",
-              content: `${poemTitle} by ${poet}`,
+              content: `${poetName} by ${titleOfPoem}`,
             },
           ],
           temperature: 0.7,
           max_tokens: 100,
         });
         const poemAnalysis = completion.choices[0].message.content;
+
+        // Error handling for GPT post request
+
+        if (!poemAnalysis) {
+          res.status(500).send("Error generating new analysis");
+        }
 
         // Posts the resulting analysis to the database
 
@@ -66,23 +90,17 @@ const checkForAnalysis = async (
       sendToGPT();
     } else {
       res.status(200).json(data);
-      console.log("Else statement at line 69 ran");
     }
   } catch (error) {
     res.status(500).send("Error getting analysis");
-    console.log(error);
   }
   next();
 };
 
 // GET analysis of a poem from database
 
-router.get(
-  "/:poemTitle",
-  checkForAnalysis,
-  async (req: Request, res: Response) => {
-    // console.log(req);
-  }
-);
+router.get("/:poemTitle", checkForAnalysis, async () => {
+  // Response is handled by middleware after it performs a check of the database
+});
 
 export default router;

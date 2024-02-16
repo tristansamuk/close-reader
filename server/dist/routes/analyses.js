@@ -17,8 +17,8 @@ const openai_1 = __importDefault(require("openai"));
 const router = express_1.default.Router();
 const db_1 = __importDefault(require("../db"));
 const openai = new openai_1.default();
-const poet = "John Donne";
-const titleId = 10;
+// const poet = "John Donne";
+// const titleId = 10;
 // Middleware
 const checkForAnalysis = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     // Query the database and send back analysis
@@ -28,10 +28,15 @@ const checkForAnalysis = (req, res, next) => __awaiter(void 0, void 0, void 0, f
             .join("titles", "titles.id", "analyses.title_id")
             .select("analyses.id", "analyses.analysis", "titles.short_title")
             .where("titles.short_title", poemTitle);
-        console.log(data);
-        // If analysis property is empty, request new analysis from GPT
+        // If no analysis in database, request new analysis from GPT
         if (!data[0]) {
-            console.log("If statement at line 39 ran");
+            const poetTitle = yield (0, db_1.default)("titles")
+                .join("poets", "poets.id", "titles.poet_id")
+                .select("poets.first_name", "poets.last_name", "titles.title", "titles.id")
+                .where("titles.short_title", poemTitle);
+            const poetName = `${poetTitle[0].first_name} ${poetTitle[0].last_name}`;
+            const titleOfPoem = poetTitle[0].title;
+            const titleId = poetTitle[0].id;
             const sendToGPT = () => __awaiter(void 0, void 0, void 0, function* () {
                 const completion = yield openai.chat.completions.create({
                     model: "gpt-3.5-turbo",
@@ -42,13 +47,17 @@ const checkForAnalysis = (req, res, next) => __awaiter(void 0, void 0, void 0, f
                         },
                         {
                             role: "user",
-                            content: `${poemTitle} by ${poet}`,
+                            content: `${poetName} by ${titleOfPoem}`,
                         },
                     ],
                     temperature: 0.7,
                     max_tokens: 100,
                 });
                 const poemAnalysis = completion.choices[0].message.content;
+                // Error handling for GPT post request
+                if (!poemAnalysis) {
+                    res.status(500).send("Error generating new analysis");
+                }
                 // Posts the resulting analysis to the database
                 yield (0, db_1.default)("analyses").insert({
                     title_id: `${titleId}`,
@@ -61,17 +70,15 @@ const checkForAnalysis = (req, res, next) => __awaiter(void 0, void 0, void 0, f
         }
         else {
             res.status(200).json(data);
-            console.log("Else statement at line 69 ran");
         }
     }
     catch (error) {
         res.status(500).send("Error getting analysis");
-        console.log(error);
     }
     next();
 });
 // GET analysis of a poem from database
-router.get("/:poemTitle", checkForAnalysis, (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    // console.log(req);
+router.get("/:poemTitle", checkForAnalysis, () => __awaiter(void 0, void 0, void 0, function* () {
+    // Response is handled by middleware after it performs a check of the database
 }));
 exports.default = router;
