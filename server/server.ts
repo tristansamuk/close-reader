@@ -2,12 +2,11 @@ import express, { Request, Response } from "express";
 import cors from "cors";
 require("dotenv").config();
 const app = express();
-import OpenAI from "openai";
 
 // Route Imports
 
 // .env variables
-const { PORT, CORS_ORIGIN, API_KEY } = process.env;
+const { PORT, CORS_ORIGIN } = process.env;
 
 // Middleware
 

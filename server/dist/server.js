@@ -9,7 +9,7 @@ require("dotenv").config();
 const app = (0, express_1.default)();
 // Route Imports
 // .env variables
-const { PORT, CORS_ORIGIN, API_KEY } = process.env;
+const { PORT, CORS_ORIGIN } = process.env;
 // Middleware
 app.use((0, cors_1.default)({ origin: CORS_ORIGIN }));
 app.use(express_1.default.json());
