@@ -17,8 +17,6 @@ const openai_1 = __importDefault(require("openai"));
 const router = express_1.default.Router();
 const db_1 = __importDefault(require("../db"));
 const openai = new openai_1.default();
-// const poet = "John Donne";
-// const titleId = 10;
 // Middleware
 const checkForAnalysis = (req, res, next) => __awaiter(void 0, void 0, void 0, function* () {
     // Query the database and send back analysis
@@ -30,6 +28,7 @@ const checkForAnalysis = (req, res, next) => __awaiter(void 0, void 0, void 0, f
             .where("titles.short_title", poemTitle);
         // If no analysis in database, request new analysis from GPT
         if (!data[0]) {
+            // Query the database and use params stored in `poemTitle` to get poet name, title of poem, and title id.
             const poetTitle = yield (0, db_1.default)("titles")
                 .join("poets", "poets.id", "titles.poet_id")
                 .select("poets.first_name", "poets.last_name", "titles.title", "titles.id")
@@ -37,21 +36,21 @@ const checkForAnalysis = (req, res, next) => __awaiter(void 0, void 0, void 0, f
             const poetName = `${poetTitle[0].first_name} ${poetTitle[0].last_name}`;
             const titleOfPoem = poetTitle[0].title;
             const titleId = poetTitle[0].id;
+            // Makes POST request to GPT to generate new analysis
             const sendToGPT = () => __awaiter(void 0, void 0, void 0, function* () {
                 const completion = yield openai.chat.completions.create({
-                    model: "gpt-3.5-turbo",
+                    model: "gpt-4",
                     messages: [
                         {
                             role: "system",
-                            content: "You are poetry expert. When you receive a poem title, please generate a short interpretive analysis that will help a reader understand what the poem is about, any interesting things to pay attention to, and situate the poem in its historical or biographical context.",
+                            content: "As an expert in poetry, your task is to provide an insightful interpretation of poem titles submitted to you. Your response should offer a concise analysis that aids readers in grasping the poem's themes and core message. Highlight key aspects to focus on, such as notable imagery, metaphors, and any lines of particular significance, offering multiple interpretations where applicable. Additionally, contextualize the poem within its historical or biographical landscape to enrich the reader's understanding. When discussing famous or complex passages, ensure your explanation is both informed by academic scholarship and presented in a manner that is engaging and accessible to a general audience. Aim for a tone that's both knowledgeable and inviting, as if you're discussing the poem with an enthusiastic friend. Please refrain from using headings in your analysis.",
                         },
                         {
                             role: "user",
-                            content: `${poetName} by ${titleOfPoem}`,
+                            content: `"${titleOfPoem}" by ${poetName}`,
                         },
                     ],
                     temperature: 0.7,
-                    max_tokens: 100,
                 });
                 const poemAnalysis = completion.choices[0].message.content;
                 // Error handling for GPT post request

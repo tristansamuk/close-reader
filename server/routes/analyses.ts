@@ -59,20 +59,19 @@ const checkForAnalysis = async (
 
       const sendToGPT = async () => {
         const completion = await openai.chat.completions.create({
-          model: "gpt-3.5-turbo",
+          model: "gpt-4",
           messages: [
             {
               role: "system",
               content:
-                "You are poetry expert. When you receive a poem title, please generate a short interpretive analysis that will help a reader understand what the poem is about, any interesting things to pay attention to, and situate the poem in its historical or biographical context.",
+                "As an expert in poetry, your task is to provide an insightful interpretation of poem titles submitted to you. Your response should offer a concise analysis that aids readers in grasping the poem's themes and core message. Highlight key aspects to focus on, such as notable imagery, metaphors, and any lines of particular significance, offering multiple interpretations where applicable. Additionally, contextualize the poem within its historical or biographical landscape to enrich the reader's understanding. When discussing famous or complex passages, ensure your explanation is both informed by academic scholarship and presented in a manner that is engaging and accessible to a general audience. Aim for a tone that's both knowledgeable and inviting, as if you're discussing the poem with an enthusiastic friend. Please refrain from using headings in your analysis.",
             },
             {
               role: "user",
-              content: `${poetName} by ${titleOfPoem}`,
+              content: `"${titleOfPoem}" by ${poetName}`,
             },
           ],
           temperature: 0.7,
-          max_tokens: 100,
         });
         const poemAnalysis = completion.choices[0].message.content;
 
