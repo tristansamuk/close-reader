@@ -40,6 +40,8 @@ const checkForAnalysis = async (
     // If no analysis in database, request new analysis from GPT
 
     if (!data[0]) {
+      // Query the database and use params stored in `poemTitle` to get poet name, title of poem, and title id.
+
       const poetTitle: poetTitleData[] = await db("titles")
         .join("poets", "poets.id", "titles.poet_id")
         .select(
@@ -52,6 +54,8 @@ const checkForAnalysis = async (
       const poetName = `${poetTitle[0].first_name} ${poetTitle[0].last_name}`;
       const titleOfPoem = poetTitle[0].title;
       const titleId = poetTitle[0].id;
+
+      // Makes POST request to GPT to generate new analysis
 
       const sendToGPT = async () => {
         const completion = await openai.chat.completions.create({
