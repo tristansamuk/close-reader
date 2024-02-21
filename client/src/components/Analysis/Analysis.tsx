@@ -24,7 +24,7 @@ const Analysis = ({ title, poetryApiUrl }: Props) => {
       }
     };
     setTimeout(() => {
-      // Simulates loading a response directly from Chat-GPT. Will connect directly on next sprint, but was a bit unpredictable to rely on for live demo.
+      // Simulates loading a response directly from Chat-GPT when fetching from database
       fetchAnalysis();
     }, 2250);
   }, []);

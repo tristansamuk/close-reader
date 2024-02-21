@@ -170,13 +170,13 @@
       padding: 2rem 2rem;
     }
     @include desktop {
-      width: 30rem;
-      height: fit-content;
+      width: 35rem;
+      height: 100%;
+      overflow: auto;
       top: 8rem;
-      left: 42rem;
+      left: 57%;
       padding: 0rem 2rem;
-      border-left: solid 1px lightgray;
-      position: inherit;
+      position: absolute;
     }
   }
   &__text {
