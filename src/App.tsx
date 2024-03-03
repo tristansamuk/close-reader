@@ -11,8 +11,10 @@ import SinglePoemPage from "./pages/SinglePoemPage/SinglePoemPage";
 import Footer from "./components/Footer/Footer";
 
 function App() {
-  const poetryApiUrl: string = import.meta.env.SERVER_URL;
-  const clientUrl: string = import.meta.env.CLIENT_URL;
+  const poetryApiUrl: string = import.meta.env.VITE_SERVER_URL;
+  const clientUrl: string = import.meta.env.VITE_CLIENT_URL;
+
+  console.log(poetryApiUrl, clientUrl);
 
   return (
     <BrowserRouter>
