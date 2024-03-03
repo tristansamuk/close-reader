@@ -8,13 +8,11 @@ import CollectionsPage from "./pages/CollectionsPage/CollectionsPage";
 import SingleCollectionPage from "./pages/SingleCollectionPage/SingleCollectionPage";
 import PoemsPage from "./pages/PoemsPage/PoemsPage";
 import SinglePoemPage from "./pages/SinglePoemPage/SinglePoemPage";
-import SearchPage from "./pages/SearchPage/SearchPage";
 import Footer from "./components/Footer/Footer";
 
 function App() {
-  // Change to process.env
-  const poetryApiUrl: string = "http://localhost:8080";
-  const clientUrl: string = "http://localhost:5173";
+  const poetryApiUrl: string = import.meta.env.SERVER_URL;
+  const clientUrl: string = import.meta.env.CLIENT_URL;
 
   return (
     <BrowserRouter>
@@ -47,8 +45,6 @@ function App() {
             <SinglePoemPage poetryApiUrl={poetryApiUrl} clientUrl={clientUrl} />
           }
         />
-        <Route path="/search" element={<SearchPage />} />
-        {/* Search Results page needed? */}
       </Routes>
       <Footer />
     </BrowserRouter>
