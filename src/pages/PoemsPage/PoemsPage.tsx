@@ -13,10 +13,10 @@ interface Props {
 interface Poem {
   id: number;
   title: string;
-  short_title: string;
-  first_name: string;
-  last_name: string;
-  pub_year: number;
+  shortTitle: string;
+  firstName: string;
+  lastName: string;
+  pubYear: number;
 }
 
 const PoemsPage = ({ poetryApiUrl, clientUrl }: Props) => {
@@ -29,6 +29,7 @@ const PoemsPage = ({ poetryApiUrl, clientUrl }: Props) => {
       try {
         const response = await axios.get(`${poetryApiUrl}/poems/all`);
         setPoemsList(response.data);
+        console.log(poemsList);
       } catch (error) {
         console.error(error);
       }
@@ -51,16 +52,16 @@ const PoemsPage = ({ poetryApiUrl, clientUrl }: Props) => {
         {poemsList.map((poem: Poem) => {
           return (
             <div key={poem.id} className="poems-page__row">
-              <Link to={`${clientUrl}/poems/${poem.short_title}`}>
+              <Link to={`${clientUrl}/poems/${poem.shortTitle}`}>
                 <h4 className="poems-page__title">{`${poem.title}`}</h4>
               </Link>
               <div className="poems-page__container--name-year">
                 <p
                   key={poem.title}
                   className="poems-page__name"
-                >{`${poem.first_name} ${poem.last_name}`}</p>
-                <p key={poem.short_title} className="poems-page__year">
-                  {`${poem.pub_year}`}
+                >{`${poem.firstName} ${poem.lastName}`}</p>
+                <p key={poem.shortTitle} className="poems-page__year">
+                  {`${poem.pubYear}`}
                 </p>
               </div>
             </div>

@@ -12,12 +12,12 @@ interface Props {
 
 interface Poet {
   id: number;
-  first_name: string;
-  last_name: string;
-  birth_year: number;
-  death_year: number;
+  firstName: string;
+  lastName: string;
+  birthYear: number;
+  deathYear: number;
   img: string;
-  url_param: string;
+  urlParam: string;
 }
 
 const PoetsPage = ({ poetryApiUrl, clientUrl }: Props) => {
@@ -50,12 +50,12 @@ const PoetsPage = ({ poetryApiUrl, clientUrl }: Props) => {
         {poetsList.map((poet) => {
           return (
             <div key={poet.id} className="poets-page__row">
-              <Link to={`${clientUrl}/poets/${poet.url_param}`}>
+              <Link to={`${clientUrl}/poets/${poet.urlParam}`}>
                 <img src={poet.img} alt="" className="poets-page__poet-pic" />
                 <h4
                   key={poet.id}
                   className="poets-page__name"
-                >{`${poet.first_name} ${poet.last_name}`}</h4>
+                >{`${poet.firstName} ${poet.lastName}`}</h4>
               </Link>
             </div>
           );

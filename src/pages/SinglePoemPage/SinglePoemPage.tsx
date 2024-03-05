@@ -13,11 +13,11 @@ type Props = {
   clientUrl: string;
 };
 interface PoemInfo {
-  first_name: string;
-  last_name: string;
+  firstName: string;
+  lastName: string;
   title: string;
-  pub_year: number;
-  url_param: string;
+  pubYear: number;
+  urlParam: string;
 }
 
 const SinglePoemPage = ({ poetryApiUrl, clientUrl }: Props) => {
@@ -67,24 +67,8 @@ const SinglePoemPage = ({ poetryApiUrl, clientUrl }: Props) => {
           `${poetryApiUrl}/poems/titles/${title}`
         );
         const poemData = response.data;
-
-        // Create an empty array to hold the lines of the poem
-
-        let linesArray: string[] = [];
-
-        // Take the values for `lns` (strings) in `poemData` and push them to `linesArray`
-
-        const createLinesArray = (poem: any) => {
-          for (let i = 0; i < poemData.length; i++) {
-            linesArray.push(poem[i].lns);
-          }
-          return linesArray;
-        };
-        createLinesArray(poemData);
-
-        // Set the state of `poem` to `linesArray`
-
-        setPoem(linesArray);
+        setPoem(poemData[0].lines);
+        console.log(poem);
       } catch (error) {
         console.error("Error fetching poem: ", error);
       }
@@ -110,8 +94,8 @@ const SinglePoemPage = ({ poetryApiUrl, clientUrl }: Props) => {
             <div className="poem__title-author-container">
               <h2 className="poem__title appear-1">{poemInfo.title}</h2>
 
-              <Link to={`${clientUrl}/poets/${poemInfo.url_param}`}>
-                <h3 className="poem__author appear-2">{`${poemInfo.first_name} ${poemInfo.last_name}`}</h3>
+              <Link to={`${clientUrl}/poets/${poemInfo.urlParam}`}>
+                <h3 className="poem__author appear-2">{`${poemInfo.firstName} ${poemInfo.lastName}`}</h3>
               </Link>
             </div>
           </div>

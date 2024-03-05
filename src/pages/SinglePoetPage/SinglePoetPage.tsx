@@ -10,25 +10,24 @@ interface Props {
 }
 
 interface Poet {
-  bio: string;
-  bio_source: string;
-  birth_year: number;
-  category_id: number;
-  created_at: string;
-  death_year: number;
-  first_name: string;
   id: number;
+  bio: string;
+  bioSource: string;
+  birthYear: number;
+  createdAt: string;
+  deathYear: number;
+  firstName: string;
   img: string;
-  last_name: string;
-  url_param: string;
+  lastName: string;
+  urlParam: string;
 }
 
 interface Poem {
   id: number;
-  first_name: string;
-  last_name: string;
-  pub_year: string;
-  short_title: string;
+  firstName: string;
+  lastName: string;
+  pubYear: string;
+  shortTitle: string;
   title: string;
 }
 
@@ -71,18 +70,20 @@ const SinglePoetPage = ({ poetryApiUrl, clientUrl }: Props) => {
     return <div className="poet-page__container--loading">Loading...</div>;
   }
 
+  console.log(poemsList);
+
   return (
     <>
       <div className="poet-page__container--max-width">
         <div key={poet.id} className="poet-page__container--profile">
           <img
             src={`${poet.img}`}
-            alt={`${poet.first_name} ${poet.last_name}`}
+            alt={`${poet.firstName} ${poet.lastName}`}
             className="poet-page__img"
           />
-          <h4 className="poet-page__name">{`${poet.first_name} ${poet.last_name}`}</h4>
+          <h4 className="poet-page__name">{`${poet.firstName} ${poet.lastName}`}</h4>
           <p className="poet-page__bio">{poet.bio}</p>
-          <a href={`${poet.bio_source}`}>
+          <a href={`${poet.bioSource}`}>
             <p className="poet-page__source">Source: Wikipedia</p>
           </a>
         </div>
@@ -94,11 +95,14 @@ const SinglePoetPage = ({ poetryApiUrl, clientUrl }: Props) => {
             {poemsList.map((poem) => {
               return (
                 <div key={poem.id} className="poet-page__row">
-                  <Link to={`${clientUrl}/poems/${poem.short_title}`}>
-                    <h4 className="poet-page__poem-title">{`${poem.title}`}</h4>
+                  <Link to={`${clientUrl}/poems/${poem.shortTitle}`}>
+                    <h4
+                      key={poem.title}
+                      className="poet-page__poem-title"
+                    >{`${poem.title}`}</h4>
                   </Link>
-                  <p key={poem.short_title} className="poet-page__pub-year">
-                    {`${poem.pub_year}`}
+                  <p key={poem.shortTitle} className="poet-page__pub-year">
+                    {`${poem.pubYear}`}
                   </p>
                 </div>
               );
