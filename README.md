@@ -6,7 +6,7 @@ Almost all the poetry that students read in English literature programs can be f
 
 📚 [Live site](https://closereader.netlify.app/)
 
-### User Profile 😎
+## User Profile 😎
 
 - General readers:
   - Curious about the poetic tradition, but don’t know where to start
