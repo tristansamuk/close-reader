@@ -26,3 +26,6 @@ notes.md
 *.sln
 *.sw?
 poem-template.json
+
+# Local Netlify folder
+.netlify
