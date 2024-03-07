@@ -13,11 +13,6 @@ const Header: React.FC = () => {
     setOpen(false);
   };
 
-  const handleClickOverlay = (e: any): void => {
-    e.preventDefault();
-    setOpen(false);
-  };
-
   return (
     <div className="header__max-width-container">
       <header className="header">
@@ -41,9 +36,6 @@ const Header: React.FC = () => {
             <li className="header__nav-item--desk">
               <Link to={"/poems"}>Poems</Link>
             </li>
-            {/* <li className="header__nav-item--desk">
-              <Link to={"collections"}>Collections</Link>
-            </li> */}
           </ul>
           <Link onClick={handleClickMenu} to={"search"}>
             <img
@@ -74,16 +66,8 @@ const Header: React.FC = () => {
                   Poems
                 </Link>
               </li>
-              {/* <li className="header__nav-item--4">
-                <Link onClick={handleClickMenu} to={"collections"}>
-                  Collections
-                </Link>
-              </li> */}
             </ul>
           </div>
-          <a onClick={handleClickOverlay} href="">
-            <div className="header__overlay"></div>
-          </a>
         </div>
       )}
     </div>

@@ -27,6 +27,7 @@
   &__container {
     &--max-width {
       @include container-max-width;
+      // position: fixed;
     }
     &--name-year {
       display: flex;
