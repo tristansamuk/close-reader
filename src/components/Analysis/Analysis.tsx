@@ -17,7 +17,7 @@ const Analysis = ({ title, poetryApiUrl }: Props) => {
     const fetchAnalysis = async () => {
       try {
         const response = await axios.get(`${poetryApiUrl}/analyses/${title}`);
-        const foundAnalysis = response.data[0].analysis;
+        const foundAnalysis = response.data;
         setText(foundAnalysis);
       } catch (error) {
         console.log("Error fetching analysis: ", error);
@@ -26,7 +26,7 @@ const Analysis = ({ title, poetryApiUrl }: Props) => {
     setTimeout(() => {
       // Simulates loading a response directly from Chat-GPT when fetching from database
       fetchAnalysis();
-    }, 2250);
+    }, 5000);
   }, []);
 
   // Loading state

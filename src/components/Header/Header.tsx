@@ -1,6 +1,6 @@
 import "./Header.scss";
 import Hamburger from "hamburger-react";
-import magnifyingGlass from "../../assets/images/icons/magnifying-glass.svg";
+// import magnifyingGlass from "../../assets/images/icons/magnifying-glass.svg";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -37,13 +37,13 @@ const Header: React.FC = () => {
               <Link to={"/poems"}>Poems</Link>
             </li>
           </ul>
-          <Link onClick={handleClickMenu} to={"search"}>
+          {/* <Link onClick={handleClickMenu} to={"search"}>
             <img
               src={magnifyingGlass}
               alt="magnifying glass"
               className="header__mag-icon"
             />
-          </Link>
+          </Link> */}
         </div>
       </header>
       {/* Mobile/Tablet Navigation Menu and Overlay*/}
