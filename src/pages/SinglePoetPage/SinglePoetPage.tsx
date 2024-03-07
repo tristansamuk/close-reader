@@ -70,8 +70,6 @@ const SinglePoetPage = ({ poetryApiUrl, clientUrl }: Props) => {
     return <div className="poet-page__container--loading">Loading...</div>;
   }
 
-  console.log(poemsList);
-
   return (
     <>
       <div className="poet-page__container--max-width">
