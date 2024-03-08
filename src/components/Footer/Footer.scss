@@ -18,7 +18,7 @@
   &__container {
     &--max-width {
       @include container-max-width;
-      animation: slideUp 500ms ease-in-out 400ms backwards;
+      animation: slideUp 600ms ease-in-out 400ms backwards;
       height: 15rem;
       display: flex;
       justify-content: flex-start;
