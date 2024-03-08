@@ -12,14 +12,22 @@ const Footer = () => {
           courtly love.
         </p>
         <div className="footer__container--logos">
-          <a href="https://github.com/tristansamuk">
+          <a
+            href="https://github.com/tristansamuk"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <img
               src={gitHubLogo}
               alt="github logo"
               className="footer__external-logo"
             />
           </a>
-          <a href="https://www.linkedin.com/in/tristansamuk/">
+          <a
+            href="https://www.linkedin.com/in/tristansamuk/"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <img
               src={linkedInLogo}
               alt="linkedin logo"
