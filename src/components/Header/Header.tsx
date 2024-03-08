@@ -1,6 +1,6 @@
 import "./Header.scss";
 import Hamburger from "hamburger-react";
-import magnifyingGlass from "../../assets/images/icons/magnifying-glass.svg";
+// import magnifyingGlass from "../../assets/images/icons/magnifying-glass.svg";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 
@@ -10,11 +10,6 @@ const Header: React.FC = () => {
   // Click Handlers
 
   const handleClickMenu = (): void => {
-    setOpen(false);
-  };
-
-  const handleClickOverlay = (e: any): void => {
-    e.preventDefault();
     setOpen(false);
   };
 
@@ -41,17 +36,14 @@ const Header: React.FC = () => {
             <li className="header__nav-item--desk">
               <Link to={"/poems"}>Poems</Link>
             </li>
-            {/* <li className="header__nav-item--desk">
-              <Link to={"collections"}>Collections</Link>
-            </li> */}
           </ul>
-          <Link onClick={handleClickMenu} to={"search"}>
+          {/* <Link onClick={handleClickMenu} to={"search"}>
             <img
               src={magnifyingGlass}
               alt="magnifying glass"
               className="header__mag-icon"
             />
-          </Link>
+          </Link> */}
         </div>
       </header>
       {/* Mobile/Tablet Navigation Menu and Overlay*/}
@@ -74,16 +66,8 @@ const Header: React.FC = () => {
                   Poems
                 </Link>
               </li>
-              {/* <li className="header__nav-item--4">
-                <Link onClick={handleClickMenu} to={"collections"}>
-                  Collections
-                </Link>
-              </li> */}
             </ul>
           </div>
-          <a onClick={handleClickOverlay} href="">
-            <div className="header__overlay"></div>
-          </a>
         </div>
       )}
     </div>
