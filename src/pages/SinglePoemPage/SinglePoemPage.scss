@@ -151,10 +151,8 @@
     animation: windowOpen 500ms ease-in-out backwards;
     background-color: white;
     border: none;
-    width: 100%;
-    height: 150%;
+    min-height: 100vh;
     padding: 2rem 2rem;
-    // overflow: visible;
     // Flex
     display: flex;
     flex-direction: column;
@@ -165,18 +163,17 @@
     top: 0rem;
     left: 0rem;
     z-index: 1;
+    height: fit-content;
     @include tablet {
       padding: 2rem 2rem;
-      height: 100%;
     }
     @include desktop {
       width: 35rem;
-      height: 100%;
       overflow: auto;
       top: 8rem;
       left: 57%;
       padding: 0rem 2rem;
-      position: absolute;
+      position: inherit;
     }
   }
   &__text {
