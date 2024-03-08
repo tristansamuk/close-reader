@@ -68,7 +68,6 @@ const SinglePoemPage = ({ poetryApiUrl, clientUrl }: Props) => {
         );
         const poemData = response.data;
         setPoem(poemData[0].lines);
-        console.log(poem);
       } catch (error) {
         console.error("Error fetching poem: ", error);
       }
