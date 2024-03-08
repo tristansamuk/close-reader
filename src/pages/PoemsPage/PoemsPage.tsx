@@ -21,6 +21,8 @@ interface Poem {
 
 const PoemsPage = ({ poetryApiUrl, clientUrl }: Props) => {
   const [poemsList, setPoemsList] = useState<Poem[] | null>(null);
+  const [currentPage, setCurrentPage] = useState<number>(1);
+  const [poemsPerPage, setPoemsPerPage] = useState<number>(10);
 
   // On render, get a list of all the poems in the database and store in state
 
@@ -29,7 +31,6 @@ const PoemsPage = ({ poetryApiUrl, clientUrl }: Props) => {
       try {
         const response = await axios.get(`${poetryApiUrl}/poems/all`);
         setPoemsList(response.data);
-        console.log(poemsList);
       } catch (error) {
         console.error(error);
       }
@@ -44,12 +45,19 @@ const PoemsPage = ({ poetryApiUrl, clientUrl }: Props) => {
       </div>
     );
   }
+
+  // Get current poems
+
+  const indexOfLastPoem = currentPage * poemsPerPage;
+  const indexOfFirstPoem = indexOfLastPoem - poemsPerPage;
+  const currentPoems = poemsList.slice(indexOfFirstPoem, indexOfLastPoem);
+
   return (
     <div className="poems-page__container--max-width">
       <h2 className="poems-page__heading">Poems</h2>
       <div className="poems-page__container--list">
         {/* Renders the list of poems */}
-        {poemsList.map((poem: Poem) => {
+        {currentPoems.map((poem: Poem) => {
           return (
             <div key={poem.id} className="poems-page__row">
               <Link to={`${clientUrl}/poems/${poem.shortTitle}`}>
