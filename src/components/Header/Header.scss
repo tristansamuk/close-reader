@@ -117,23 +117,6 @@
       }
     }
   }
-  &__overlay {
-    animation: overlayOpen 250ms;
-    background-color: black;
-    height: 100vh;
-    width: 100vw;
-    opacity: 0.5;
-    position: absolute;
-    top: 16.57rem;
-    z-index: 1;
-    @include tablet {
-      top: 18.5rem;
-      right: 0rem;
-    }
-    @include desktop {
-      display: none;
-    }
-  }
   &__container-right {
     display: flex;
     align-items: center;
