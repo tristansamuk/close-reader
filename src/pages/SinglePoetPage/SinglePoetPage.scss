@@ -30,11 +30,13 @@
       display: flex;
       flex-direction: column;
       gap: 2rem;
+      height: fit-content;
       @include tablet {
         flex-direction: row;
       }
     }
     &--loading {
+      min-height: 100vh;
       animation: slideUp 1.5s ease-in-out 2s backwards infinite;
       display: flex;
       justify-content: center;

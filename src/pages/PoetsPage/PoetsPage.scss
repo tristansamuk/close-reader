@@ -27,7 +27,6 @@
   &__container {
     &--max-width {
       @include container-max-width;
-      min-height: 100vh;
     }
     &--list {
       padding: 1rem 0;
@@ -69,6 +68,7 @@
   }
   &__loading-container {
     animation: slideUp 500ms ease-in-out 1s backwards;
+    min-height: 100vh;
     display: flex;
     justify-content: center;
     align-content: center;
