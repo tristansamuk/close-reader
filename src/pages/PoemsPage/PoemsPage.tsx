@@ -52,7 +52,7 @@ const PoemsPage = ({ poetryApiUrl, clientUrl }: Props) => {
   const indexOfLastPoem = currentPage * poemsPerPage;
   const indexOfFirstPoem = indexOfLastPoem - poemsPerPage;
   const currentPoems = poemsList.slice(indexOfFirstPoem, indexOfLastPoem);
-
+  window.scrollTo(0, 0);
   return (
     <div className="poems-page__container--max-width">
       <h2 className="poems-page__heading">Poems</h2>
