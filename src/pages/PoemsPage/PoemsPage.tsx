@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import "./PoemsPage.scss";
 import { useState, useEffect } from "react";
 import axios from "axios";
+import Pagination from "../../components/Pagination/Pagination";
 
 // Types
 
@@ -22,7 +23,7 @@ interface Poem {
 const PoemsPage = ({ poetryApiUrl, clientUrl }: Props) => {
   const [poemsList, setPoemsList] = useState<Poem[] | null>(null);
   const [currentPage, setCurrentPage] = useState<number>(1);
-  const [poemsPerPage, setPoemsPerPage] = useState<number>(10);
+  const [poemsPerPage] = useState<number>(10);
 
   // On render, get a list of all the poems in the database and store in state
 
@@ -46,7 +47,7 @@ const PoemsPage = ({ poetryApiUrl, clientUrl }: Props) => {
     );
   }
 
-  // Get current poems
+  // Create array of poems to be displayed on current page
 
   const indexOfLastPoem = currentPage * poemsPerPage;
   const indexOfFirstPoem = indexOfLastPoem - poemsPerPage;
@@ -76,6 +77,12 @@ const PoemsPage = ({ poetryApiUrl, clientUrl }: Props) => {
           );
         })}
       </div>
+      <Pagination
+        poemsPerPage={poemsPerPage}
+        totalPoems={poemsList.length}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+      />
     </div>
   );
 };
