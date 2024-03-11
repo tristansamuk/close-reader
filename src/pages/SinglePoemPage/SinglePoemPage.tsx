@@ -84,7 +84,7 @@ const SinglePoemPage = ({ poetryApiUrl, clientUrl }: Props) => {
       </div>
     );
   }
-
+  window.scrollTo(0, 0);
   return (
     <>
       <div className="poem__max-width-container">
@@ -116,7 +116,6 @@ const SinglePoemPage = ({ poetryApiUrl, clientUrl }: Props) => {
               </button>
               <Analysis title={`${title}`} poetryApiUrl={`${poetryApiUrl}`} />
             </div>
-            <div className="analysis__overlay"></div>
           </>
         )}
       </div>

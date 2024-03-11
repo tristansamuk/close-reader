@@ -42,7 +42,7 @@ const PoetsPage = ({ poetryApiUrl, clientUrl }: Props) => {
       </div>
     );
   }
-
+  window.scrollTo(0, 0);
   return (
     <div className="poets-page__container--max-width">
       <h2 className="poets-page__heading">Poets</h2>

@@ -89,7 +89,8 @@
 @mixin body-copy {
   font-family: $sans-serif;
   line-height: 1.5rem;
-  font-size: 12px;
+  // font-size: 12px;
+  font-size: 1rem;
   font-weight: $normal;
   @include tablet {
     font-size: 1rem;

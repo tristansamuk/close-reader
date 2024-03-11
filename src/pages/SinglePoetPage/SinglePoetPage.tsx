@@ -69,7 +69,7 @@ const SinglePoetPage = ({ poetryApiUrl, clientUrl }: Props) => {
   if (!poet || !poemsList) {
     return <div className="poet-page__container--loading">Loading...</div>;
   }
-
+  window.scrollTo(0, 0);
   return (
     <>
       <div className="poet-page__container--max-width">

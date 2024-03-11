@@ -22,6 +22,9 @@ interface Poem {
 
 const PoemsPage = ({ poetryApiUrl, clientUrl }: Props) => {
   const [poemsList, setPoemsList] = useState<Poem[] | null>(null);
+
+  // State for pagination
+
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [poemsPerPage] = useState<number>(10);
 
@@ -52,6 +55,9 @@ const PoemsPage = ({ poetryApiUrl, clientUrl }: Props) => {
   const indexOfLastPoem = currentPage * poemsPerPage;
   const indexOfFirstPoem = indexOfLastPoem - poemsPerPage;
   const currentPoems = poemsList.slice(indexOfFirstPoem, indexOfLastPoem);
+
+  // Focuses window on top of page on render
+
   window.scrollTo(0, 0);
   return (
     <div className="poems-page__container--max-width">

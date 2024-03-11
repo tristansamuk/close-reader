@@ -7,7 +7,7 @@ const Hero = () => {
   // Click Handler
 
   const handleClickButton = () => {
-    navigate("/poems");
+    navigate("/poets");
   };
 
   return (
@@ -16,7 +16,7 @@ const Hero = () => {
         <div className="hero__button-text-container">
           <div className="hero__text-container">
             <h2 className="hero__heading appear-1">
-              The app for poetry lovers
+              The place for poetry lovers
             </h2>
             <h3 className="hero__subheading appear-2">
               Experience the best poetry in the English language with the help
