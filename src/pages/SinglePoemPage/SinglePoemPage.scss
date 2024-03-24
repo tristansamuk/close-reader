@@ -168,6 +168,8 @@
     height: fit-content;
     @include tablet {
       padding: 2rem 2rem;
+      border: none;
+      box-shadow: none;
     }
     @include desktop {
       width: 35rem;
